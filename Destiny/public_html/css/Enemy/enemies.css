@@ -1,0 +1,112 @@
+body {
+  background-image: url("../../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#control {
+    background-color: whitesmoke;
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+    /* Upper string */
+.firstStroke {
+    display: inline-block;   
+}
+#mainLabel {
+    margin-top: 0%;
+    margin-bottom: 4%;
+    text-decoration: underline;
+}
+#backButton {
+    float: right;
+    margin-top: 1%;
+    margin-right: 1%;
+    width: 55px;
+    height: 40px;
+    text-align: center;
+    color: black;
+    background-color: crimson;
+    font-size: 20px;
+}
+
+    /* searcing field */
+input[type=text] {
+    width: 88%;
+    margin-bottom: 1%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+    /* Table data */
+#tableDiv {
+    height: 520px;
+    overflow: scroll;
+    margin-bottom: 6%;
+    display: flex;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+    padding-bottom: 20px;
+    border-bottom: #ccc solid 1px;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 6%;
+  
+    background-color: white;
+    color: black;
+
+    width:88%;word-break: break-all;table-layout: fixed
+}
+th, td{
+    padding: 15px 20px;
+    border: 1px solid black;
+    color: black;
+}
+
+tr.highlighted {
+    background-color: yellow; /* или любой другой цвет */
+}
+
+    /* Bottom buttons */
+.Buttons {
+    border: none;
+    width: 200px;
+    height: 47px;
+    background-color: rgb(45, 95, 225); 
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    border-radius: 8px;
+    
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.Buttons:hover {
+    background-color: white; 
+    color:  #4169E1;
+}
+.Buttons:active {
+  background-color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#addCharacterBtn {
+    float: left;
+    margin-left: 6%;
+}
+#backBtn {
+    float: right;
+    margin-right: 6%;
+    background-color: tomato;
+}
