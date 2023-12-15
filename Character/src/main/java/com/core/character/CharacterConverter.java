@@ -1,6 +1,7 @@
-package com.core;
+package com.core.character;
 
-import com.core.web.CharacterView;
+import com.core.character.Character;
+import com.core.character.web.CharacterView;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

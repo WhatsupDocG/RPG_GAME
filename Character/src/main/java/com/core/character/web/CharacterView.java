@@ -1,18 +1,25 @@
-package com.core.web;
+package com.core.character.web;
 
-import com.core.Sex;
+import com.core.character.Sex;
 
-import javax.validation.constraints.NotEmpty;
+public class CharacterView {
+    private Integer id;
 
-public class CharacterReq {
-    @NotEmpty
     private String name;
-    @NotEmpty
+
     private Sex sex;
 
     private float health;
 
     private float damage;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,6 +29,7 @@ public class CharacterReq {
         this.name = name;
     }
 
+
     public Sex getSex() {
         return sex;
     }
@@ -29,6 +37,7 @@ public class CharacterReq {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
+
 
     public float getHealth() {
         return health;
