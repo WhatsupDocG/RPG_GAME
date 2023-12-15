@@ -11,6 +11,7 @@ CREATE TABLE rpg_character (
   sex int4,
   health float4,
   damage float4,
+  character_level_id int4,
   PRIMARY KEY (id));
 
 CREATE SEQUENCE character_level_id_seq

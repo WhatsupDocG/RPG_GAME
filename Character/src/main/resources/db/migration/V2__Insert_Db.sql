@@ -1,10 +1,10 @@
-INSERT INTO rpg_character (name, sex, health, damage)
+INSERT INTO rpg_character (name, sex, health, damage, character_level_id)
 VALUES
-('Creig',0, 100, 100),
-('Vally',1, 100, 100);
+('Creig',0, 100, 100, 0),
+('Vally',1, 100, 100, 2);
 
 INSERT INTO rpg_character_level (name)
 VALUES
-    ('usual');
-    ('silver');
+    ('usual'),
+    ('silver'),
     ('legend');
