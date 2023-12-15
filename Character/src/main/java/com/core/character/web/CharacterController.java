@@ -1,8 +1,8 @@
-package com.core.web;
+package com.core.character.web;
 
-import com.core.Character;
-import com.core.CharacterConverter;
-import com.core.CharacterService;
+import com.core.character.Character;
+import com.core.character.CharacterConverter;
+import com.core.character.CharacterService;
 import com.util.CallBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -15,9 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
@@ -26,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping(value = "/character")
-@CrossOrigin(origins = "file:///C:/Users/silve/Downloads/Destiny/public_html/index.html")
+@CrossOrigin(origins = "http://localhost:8383")
 public class CharacterController {
         private final CharacterService service;
         private final CharacterConverter converter;
@@ -40,11 +38,13 @@ public class CharacterController {
         public CharacterController(CharacterService service,
                                   MessageSource messageSource,
                                    CharacterConverter converter,
-                                   RestTemplate restTemplate) {
+                                   RestTemplate restTemplate,
+                                   CallBackService callbackService) {
             this.service = service;
             this.messageSource = messageSource;
             this.converter = converter;
             this.restTemplate = restTemplate;
+            this.callbackService = callbackService;
         }
 
         @GetMapping("/{id}")
@@ -57,7 +57,7 @@ public class CharacterController {
 
     @GetMapping("/getItems")
     public CompletableFuture<ResponseEntity<Object>> requestItemsFromSecondMicroservice() {
-        String secondMicroserviceUrl = "http://localhost:9102/item/item/getItems";
+        String secondMicroserviceUrl = "http://localhost:9102/character/character/getItems";
 
         CompletableFuture<ResponseEntity<List<Object>>> futureResponse = CompletableFuture.supplyAsync(() -> {
             try {

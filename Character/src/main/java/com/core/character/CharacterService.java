@@ -1,6 +1,6 @@
-package com.core;
+package com.core.character;
 
-import com.core.web.CharacterReq;
+import com.core.character.web.CharacterReq;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.EmptyResultDataAccessException;
