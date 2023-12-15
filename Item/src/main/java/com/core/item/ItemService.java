@@ -1,6 +1,7 @@
 package com.core.item;
 
 import com.core.item.web.ItemReq;
+import com.core.item.ItemRepo;
 import com.core.itemLevel.ItemLevelRepo;
 import com.core.itemType.ItemTypeRepo;
 import org.springframework.context.MessageSource;

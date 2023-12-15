@@ -170,7 +170,7 @@ function fetchCharacters() {
       if (data.content && Array.isArray(data.content)) {
         // Используем data.content вместо data
         data.content.forEach(character => {
-          addCharacterToTable(character);
+          addCharacter(character);
         });
       } else {
         console.error('Неверный формат данных о персонажах');
@@ -183,8 +183,8 @@ function fetchCharacters() {
   });
 }
 
-// Функция добавления персонажа в таблицу
-function addCharacterToTable(character) {
+// Функция добавления персонажа в таблицу и привязки обработчиков событий
+function addCharacterToTable(character, eventHandlers) {
   const newRow = CreateElement('tr');
 
   // Создаем ячейки и заполняем данными о персонаже
@@ -194,10 +194,40 @@ function addCharacterToTable(character) {
     newRow.appendChild(newCell);
   }
 
-  // Добавляем строку в tbody таблицы
-  table.appendChild(newRow); // Используем table вместо tbody
+  // Присваиваем строке идентификатор, чтобы можно было легко найти ее позже
+  newRow.setAttribute('data-character-id', character.id);
+
+  // Добавление обработчиков событий для нового элемента
+  if (eventHandlers && typeof eventHandlers === 'function') {
+    eventHandlers(newRow);
+  }
+
+  // Добавляем строку в таблицу
+  table.appendChild(newRow);
 }
 
+// Функция добавления персонажа в таблицу
+function addCharacter(character) {
+  // Функция обработчиков событий для нового элемента
+  const eventHandlers = function (row) {
+    row.addEventListener("mouseover", function() {
+      this.classList.add("over");
+    });
+
+    row.addEventListener("mouseout", function() {
+      this.classList.remove("over");
+    });
+
+    row.addEventListener("click", function() {
+      // Получаем id персонажа из атрибута данных
+      let characterId = this.getAttribute('data-character-id');
+      window.location.href = '../../html/Character/character.html?id=' + characterId;
+    });
+  };
+
+  // Вызываем функцию добавления персонажа в таблицу с передачей обработчиков событий
+  addCharacterToTable(character, eventHandlers);
+}
 
 // Вызываем функцию для получения данных о персонажах
 fetchCharacters();

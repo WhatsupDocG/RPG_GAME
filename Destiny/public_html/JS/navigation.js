@@ -18,3 +18,12 @@ function goToPreviousPage() {
         // window.location.href = 'defaultPage.html';
     }
 }
+
+function getUrlID() {   
+      // Получаем текущий URL страницы
+      let currentUrl = new URL(window.location.href);
+      // Получаем параметры из строки запроса
+      let searchParams = new URLSearchParams(currentUrl.search);
+
+      return searchParams.get('id');
+}

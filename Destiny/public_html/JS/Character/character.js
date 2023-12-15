@@ -115,16 +115,99 @@ function addItem() {
 
     amountItems++;
  }
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
+ 
+  
+// Функция, отправляющая запрос на бэкенд и обрабатывающая полученные данные
+function fetchCharacters() {
+  // URL бэкенда, который предоставляет данные о персонажах
+  let chId = getUrlID();
+  console.log(chId);
+  const backendUrl = 'http://localhost:9101/character/character/getItems/' + chId;
+
+  // Опции запроса
+  const requestOptions = {
+    type: 'GET',
+    contentType: 'application/json'
+  };
+
+  // Отправляем GET-запрос на бэкенд
+  $.ajax({
+    url: backendUrl,
+    type: requestOptions.type,
+    contentType: requestOptions.contentType,
+    success: function (data) {
+      // Обработка данных, полученных от бэкенда
+      console.log('Полученные данные о предметах персонажа:', data);
+
+      // Очищаем tbody перед добавлением новых данных
+      tbody.innerHTML = '';
+
+      // Проверяем наличие свойства content и его тип (массив)
+      if (data.content && Array.isArray(data.content)) {
+        // Используем data.content вместо data
+        data.content.forEach(character => {
+          addCharacter(character);
+        });
+      } else {
+        console.error('Неверный формат данных о предметах');
+      }
+    },
+    error: function (error) {
+      // Обработка ошибок при выполнении запроса
+      console.error('Ошибка при получении данных:', error);
+    }
+  });
+}
+
+// Функция добавления персонажа в таблицу и привязки обработчиков событий
+function addCharacterToTable(character, eventHandlers) {
+  const newRow = CreateElement('tr');
+
+  // Создаем ячейки и заполняем данными о персонаже
+  for (let key in character) {
+    const newCell = CreateElement('td');
+    newCell.innerHTML = character[key];
+    newRow.appendChild(newCell);
+  }
+
+  // Присваиваем строке идентификатор, чтобы можно было легко найти ее позже
+  newRow.setAttribute('data-character-id', character.id);
+
+  // Добавление обработчиков событий для нового элемента
+  if (eventHandlers && typeof eventHandlers === 'function') {
+    eventHandlers(newRow);
+  }
+
+  // Добавляем строку в таблицу
+  table.appendChild(newRow);
+}
+
+// Функция добавления персонажа в таблицу
+function addCharacter(character) {
+  // Функция обработчиков событий для нового элемента
+  const eventHandlers = function (row) {
+    row.addEventListener("mouseover", function() {
+      this.classList.add("over");
+    });
+
+    row.addEventListener("mouseout", function() {
+      this.classList.remove("over");
+    });
+
+    row.addEventListener("click", function() {
+      // Получаем id персонажа из атрибута данных
+      const characterId = this.getAttribute('data-character-id');
+      window.location.href = '../../html/Character/character.html?id=' + characterId;
+    });
+  };
+
+  // Вызываем функцию добавления персонажа в таблицу с передачей обработчиков событий
+  addCharacterToTable(character, eventHandlers);
+}
+
+// Вызываем функцию для получения данных о персонажах
+fetchCharacters();
+
 
 ////////////////////////////////////////////
 //TABLE NUMBER 2 - Spells
