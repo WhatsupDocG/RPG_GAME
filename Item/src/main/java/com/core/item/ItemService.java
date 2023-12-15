@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ItemService {
@@ -36,6 +37,10 @@ public class ItemService {
                 .orElseThrow(() -> new EntityNotFoundException(messageSource
                         .getMessage("com.core.web.ItemWithIdNotExists", new Object[]{id},
                                 LocaleContextHolder.getLocale())));
+    }
+
+    public List<Item> getItemByCharacterId(Integer id, Pageable pageable){
+        return itemRepo.findByCharacterId(id);
     }
 
     public Page<Item> findAllItem(Pageable pageable){
@@ -69,6 +74,7 @@ public class ItemService {
         item.setName(itemBaseReq.getName());
         item.setDamage(itemBaseReq.getDamage());
         item.setArmor(itemBaseReq.getArmor());
+        item.setCharacterId(itemBaseReq.getCharacterId());
         item.setItemLevel(itemLevelRepo.getOne(itemBaseReq.getItemLevel()));
         item.setItemType(itemTypeRepo.getOne(itemBaseReq.getItemType()));
     }

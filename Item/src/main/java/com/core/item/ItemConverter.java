@@ -14,6 +14,7 @@ public class ItemConverter implements Converter<Item, ItemView> {
         view.setName(item.getName());
         view.setDamage(item.getDamage());
         view.setArmor(item.getArmor());
+        view.setCharacterId(item.getCharacterId());
         view.setItemLevel(item.getItemLevel().getId());
         view.setItemType(item.getItemType().getId());
         return view;

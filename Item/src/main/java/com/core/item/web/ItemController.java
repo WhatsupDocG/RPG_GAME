@@ -56,19 +56,22 @@ public class ItemController {
         }
 
     @Async
-    @GetMapping("/getItems")
-    public CompletableFuture<List<ItemView>> getItems(@PageableDefault(sort = "id",
+    @GetMapping("/getItems/{characterId}")
+    public CompletableFuture<List<ItemView>> getItemsByCharacterId(
+            @PathVariable Integer characterId,
+            @PageableDefault(sort = "id",
             direction = Sort.Direction.ASC) Pageable pageable) {
 
         CompletableFuture<List<ItemView>> future = CompletableFuture.supplyAsync(() -> {
             CompletableFuture.runAsync(() -> callbackService.onSecondMicroserviceProcessed("Request accepted"));
 
-            List<ItemView> items =  service.findAllItem(pageable)
-                    .getContent()
-                    .stream()
+            List<Item> items = service.getItemByCharacterId(characterId, pageable);
+
+            List<ItemView> itemViews = items.stream()
                     .map(converter::convert)
                     .collect(Collectors.toList());
-            return items;
+
+            return itemViews;
         });
 
         return future.thenComposeAsync(result ->

@@ -12,6 +12,8 @@ public class ItemReq {
 
     private Integer itemLevel;
 
+    private Integer characterId;
+
     public String getName() {
         return name;
     }
@@ -26,6 +28,14 @@ public class ItemReq {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public Integer getCharacterId() {
+        return characterId;
+    }
+
+    public void setCharacterId(Integer characterId) {
+        this.characterId = characterId;
     }
 
     public Integer getItemType() {

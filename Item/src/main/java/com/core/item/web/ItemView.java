@@ -13,6 +13,8 @@ public class ItemView {
 
     private Integer itemLevel;
 
+    private Integer characterId;
+
     public Integer getId() {
         return id;
     }
@@ -35,6 +37,14 @@ public class ItemView {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public Integer getCharacterId() {
+        return characterId;
+    }
+
+    public void setCharacterId(Integer characterId) {
+        this.characterId = characterId;
     }
 
     public Integer getItemType() {

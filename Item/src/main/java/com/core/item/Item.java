@@ -33,6 +33,9 @@ public class Item {
     @Column(name = "armor")
     private float armor;
 
+    @Column(name = "character_id")
+    private Integer characterId;
+
     @ManyToOne
     private ItemLevel itemLevel;
 
@@ -69,6 +72,14 @@ public class Item {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public Integer getCharacterId() {
+        return characterId;
+    }
+
+    public void setCharacterId(Integer characterId) {
+        this.characterId = characterId;
     }
 
     public ItemLevel getItemLevel() {

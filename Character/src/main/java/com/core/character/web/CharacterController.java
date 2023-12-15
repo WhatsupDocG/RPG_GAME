@@ -55,9 +55,12 @@ public class CharacterController {
             return converter.convert(character);
         }
 
-    @GetMapping("/getItems")
-    public CompletableFuture<ResponseEntity<Object>> requestItemsFromSecondMicroservice() {
-        String secondMicroserviceUrl = "http://localhost:9102/character/character/getItems";
+    @GetMapping("/getItems/{characterId}")
+    public CompletableFuture<ResponseEntity<Object>> getItems(
+        @PathVariable Long characterId,
+        @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+
+        String secondMicroserviceUrl = "http://localhost:9102/character/character/getItems/"+ characterId;
 
         CompletableFuture<ResponseEntity<List<Object>>> futureResponse = CompletableFuture.supplyAsync(() -> {
             try {
