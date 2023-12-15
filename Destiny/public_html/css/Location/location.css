@@ -1,0 +1,99 @@
+body {
+  background-image: url("../../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#control {
+    background-color: whitesmoke;
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
+}
+
+    /* Upper string */
+.firstStroke {
+    display: inline-block;   
+    text-align: right;
+}
+#mainLabel {
+    text-align: center;
+    margin-top: 0%;
+    margin-bottom: 4%;
+    text-decoration: underline;
+}
+#backButton {
+    float: right;
+    margin-top: 1%;
+    margin-right: 1%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    color: black;
+    background-color: crimson;
+    font-size: 20px;
+}
+
+    /* Portrait data */
+.portraitDataDiv {
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+}
+#portrait {
+    margin-left: 6%;
+    margin-bottom: 6%;
+    width: 15%;
+}
+.portraitData {
+    font-size: 193%;
+    margin-left: 6%;
+}
+
+    /* Table data */
+.tableLabels {
+    font-size: 30px;
+    text-align: center;
+    
+}
+#tableLabelsDiv {
+    margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+}
+#labelItems {
+    flex: 1; /* Это даст элементу labelItems возможность занимать оставшееся пространство */
+}
+#labelSpells {
+   flex: 1;
+}
+
+#tableDiv {
+    height: 400px;
+    overflow: scroll;
+    margin-bottom: 6%;
+    display: flex;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0; 
+    padding-bottom: 20px;
+    border-bottom: #ccc solid 1px;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 5%;
+  
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+th, td{
+    padding: 15px 20px;
+    border: 1px solid black;
+    color: black;
+}
