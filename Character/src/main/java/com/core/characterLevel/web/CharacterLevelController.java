@@ -1,8 +1,8 @@
 package com.core.characterLevel.web;
 
-import com.core.itemLevel.ItemLevel;
-import com.core.itemLevel.ItemLevelConverter;
-import com.core.itemLevel.ItemLevelService;
+import com.core.characterLevel.CharacterLevel;
+import com.core.characterLevel.CharacterLevelConverter;
+import com.core.characterLevel.CharacterLevelService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/itemLevel")
-public class ItemLevelController {
-        private final ItemLevelService service;
-        private final ItemLevelConverter converter;
+@RequestMapping(value = "/characterLevel")
+public class CharacterLevelController {
+        private final CharacterLevelService service;
+        private final CharacterLevelConverter converter;
         private final MessageSource messageSource;
 
-        public ItemLevelController(ItemLevelService service,
-                                  MessageSource messageSource,
-                                  ItemLevelConverter converter) {
+        public CharacterLevelController(CharacterLevelService service,
+                                        MessageSource messageSource,
+                                        CharacterLevelConverter converter) {
             this.service = service;
             this.messageSource = messageSource;
             this.converter = converter;
@@ -31,47 +31,47 @@ public class ItemLevelController {
 
         @GetMapping("/{id}")
         @ResponseBody
-        public ItemLevelView getItemLevelById(@PathVariable Integer id) {
-            ItemLevel itemLevel = service.getItemLevelById(id);
-            checkNull(itemLevel, id);
-            return converter.convert(itemLevel);
+        public CharacterLevelView getCharacterLevelById(@PathVariable Integer id) {
+            CharacterLevel characterLevel = service.getCharacterLevelById(id);
+            checkNull(characterLevel, id);
+            return converter.convert(characterLevel);
         }
 
         @GetMapping
         @ResponseBody
-        public Page <ItemLevelView> getAllItemLevel(@PageableDefault(sort = "id",
+        public Page <CharacterLevelView> getAllCharacterLevel(@PageableDefault(sort = "id",
                 direction = Sort.Direction.ASC) Pageable pageable) {
-            return service.findAllItemLevel(pageable)
+            return service.findAllCharacterLevel(pageable)
                     .map(converter::convert);
         }
 
         @PostMapping
         @ResponseStatus(HttpStatus.CREATED)
         @ResponseBody
-        public ItemLevelView createItemLevel(@RequestBody @Valid ItemLevelReq req) {
-            return converter.convert(service.createItemLevel(req));
+        public CharacterLevelView createCharacterLevel(@RequestBody @Valid CharacterLevelReq req) {
+            return converter.convert(service.createCharacterLevel(req));
         }
 
         @DeleteMapping("/{id}")
         @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteItemLevel(@PathVariable Integer id){
-            ItemLevel itemLevel = service.getItemLevelById(id);
-            checkNull(itemLevel, id);
-            service.deleteItemLevel(id);
+        public void deleteCharacterLevel(@PathVariable Integer id){
+            CharacterLevel characterLevel = service.getCharacterLevelById(id);
+            checkNull(characterLevel, id);
+            service.deleteCharacterLevel(id);
         }
 
         @PutMapping("/{id}")
-        public ItemLevelView updateItemLevel(@PathVariable(name = "id") Integer id,
-                                           @RequestBody @Valid ItemLevelReq req){
-            ItemLevel itemLevel = service.getItemLevelById(id);
-            checkNull(itemLevel, id);
-            return converter.convert(service.updateItemLevel(itemLevel, req));
+        public CharacterLevelView updateCharacterLevel(@PathVariable(name = "id") Integer id,
+                                                  @RequestBody @Valid CharacterLevelReq req){
+            CharacterLevel characterLevel = service.getCharacterLevelById(id);
+            checkNull(characterLevel, id);
+            return converter.convert(service.updateCharacterLevel(characterLevel, req));
         }
 
-        private void checkNull (ItemLevel itemLevel, Integer id) {
-            if (itemLevel == null) {
+        private void checkNull (CharacterLevel characterLevel, Integer id) {
+            if (characterLevel == null) {
                 String message = messageSource.getMessage(
-                        "com.core.web.ItemLevelWithIdNotExists", new Object[]{id},
+                        "com.core.web.CharacterLevelWithIdNotExists", new Object[]{id},
                         LocaleContextHolder.getLocale());
             }
         }

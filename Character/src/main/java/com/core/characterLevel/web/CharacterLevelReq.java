@@ -2,7 +2,7 @@ package com.core.characterLevel.web;
 
 import javax.validation.constraints.NotEmpty;
 
-public class ItemLevelReq {
+public class CharacterLevelReq {
     @NotEmpty
     private String name;
 

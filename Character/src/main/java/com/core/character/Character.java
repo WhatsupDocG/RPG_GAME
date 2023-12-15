@@ -1,5 +1,6 @@
 package com.core.character;
 
+import com.core.characterLevel.CharacterLevel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -34,6 +35,9 @@ public class Character {
 
     @Column(name = "damage")
     private float damage;
+
+    @ManyToOne
+    private CharacterLevel characterLevel;
 
     public Integer getId() {
         return id;
@@ -75,5 +79,13 @@ public class Character {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public CharacterLevel getCharacterLevel() {
+        return characterLevel;
+    }
+
+    public void setCharacterLevel(CharacterLevel characterLevel) {
+        this.characterLevel = characterLevel;
     }
 }

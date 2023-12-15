@@ -1,6 +1,6 @@
 package com.core.characterLevel;
 
-import com.core.itemLevel.web.ItemLevelReq;
+import com.core.characterLevel.web.CharacterLevelReq;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -12,53 +12,53 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 @Service
-public class ItemLevelService {
+public class CharacterLevelService {
 
-    private final ItemLevelRepo itemLevelRepo;
+    private final CharacterLevelRepo characterLevelRepo;
     private final MessageSource messageSource;
 
-    public ItemLevelService(ItemLevelRepo itemLevelRepo,
-                           MessageSource messageSource){
-        this.itemLevelRepo = itemLevelRepo;
+    public CharacterLevelService(CharacterLevelRepo characterLevelRepo,
+                                 MessageSource messageSource){
+        this.characterLevelRepo = characterLevelRepo;
         this.messageSource = messageSource;
     }
 
-    public ItemLevel getItemLevelById(Integer id){
-        return itemLevelRepo.findById(id)
+    public CharacterLevel getCharacterLevelById(Integer id){
+        return characterLevelRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(messageSource
-                        .getMessage("com.core.web.ItemLevelWithIdNotExists", new Object[]{id},
+                        .getMessage("com.core.web.CharacterLevelWithIdNotExists", new Object[]{id},
                                 LocaleContextHolder.getLocale())));
     }
 
-    public Page<ItemLevel> findAllItemLevel(Pageable pageable){
-        return itemLevelRepo.findAll(pageable);
+    public Page<CharacterLevel> findAllCharacterLevel(Pageable pageable){
+        return characterLevelRepo.findAll(pageable);
     }
 
-    public ItemLevel createItemLevel(ItemLevelReq req) {
-        ItemLevel itemLevel = new ItemLevel();
-        this.prepareItemLevel(itemLevel,req);
-        itemLevelRepo.save(itemLevel);
-        return itemLevel;
+    public CharacterLevel createCharacterLevel(CharacterLevelReq req) {
+        CharacterLevel characterLevel = new CharacterLevel();
+        this.prepareCharacterLevel(characterLevel,req);
+        characterLevelRepo.save(characterLevel);
+        return characterLevel;
     }
 
     @Transactional
-    public void deleteItemLevel(Integer id) {
+    public void deleteCharacterLevel(Integer id) {
         try {
-            itemLevelRepo.deleteById(id);
+            characterLevelRepo.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new EntityNotFoundException(messageSource
-                    .getMessage("com.core.web.ItemLevelWithIdNotExists", new Object[]{id},
+                    .getMessage("com.core.web.CharacterLevelWithIdNotExists", new Object[]{id},
                             LocaleContextHolder.getLocale()));
         }
     }
 
-    public ItemLevel updateItemLevel(ItemLevel itemLevel, ItemLevelReq req){
-        this.prepareItemLevel(itemLevel,req);
-        itemLevelRepo.save(itemLevel);
-        return itemLevel;
+    public CharacterLevel updateCharacterLevel(CharacterLevel characterLevel, CharacterLevelReq req){
+        this.prepareCharacterLevel(characterLevel,req);
+        characterLevelRepo.save(characterLevel);
+        return characterLevel;
     }
-    public void prepareItemLevel(ItemLevel itemLevel, ItemLevelReq itemLevelBaseReq){
-        itemLevel.setName(itemLevelBaseReq.getName());
+    public void prepareCharacterLevel(CharacterLevel characterLevel, CharacterLevelReq characterLevelBaseReq){
+        characterLevel.setName(characterLevelBaseReq.getName());
     }
 
 

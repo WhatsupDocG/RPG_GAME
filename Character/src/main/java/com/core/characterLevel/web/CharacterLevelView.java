@@ -1,6 +1,6 @@
 package com.core.characterLevel.web;
 
-public class ItemLevelView {
+public class CharacterLevelView {
     private Integer id;
 
     private String name;

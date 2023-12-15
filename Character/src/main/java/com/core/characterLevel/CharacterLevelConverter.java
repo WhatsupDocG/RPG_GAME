@@ -1,17 +1,17 @@
 package com.core.characterLevel;
 
-import com.core.itemLevel.web.ItemLevelView;
+import com.core.characterLevel.web.CharacterLevelView;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ItemLevelConverter implements Converter<ItemLevel, ItemLevelView> {
+public class CharacterLevelConverter implements Converter<CharacterLevel, CharacterLevelView> {
     @Override
-    public ItemLevelView convert(@NonNull ItemLevel itemLevel) {
-        ItemLevelView view = new ItemLevelView();
-        view.setId(itemLevel.getId());
-        view.setName(itemLevel.getName());
+    public CharacterLevelView convert(@NonNull CharacterLevel characterLevel) {
+        CharacterLevelView view = new CharacterLevelView();
+        view.setId(characterLevel.getId());
+        view.setName(characterLevel.getName());
         return view;
     }
 
