@@ -1,6 +1,7 @@
 package com.core.character;
 
 import com.core.character.web.CharacterReq;
+import com.core.characterLevel.CharacterLevelRepo;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,11 +16,14 @@ import javax.transaction.Transactional;
 public class CharacterService {
 
     private final CharacterRepo characterRepo;
+
+    private final CharacterLevelRepo characterLevelRepo;
     private final MessageSource messageSource;
 
     public CharacterService(CharacterRepo characterRepo,
-                            MessageSource messageSource){
+                            CharacterLevelRepo characterLevelRepo, MessageSource messageSource){
         this.characterRepo = characterRepo;
+        this.characterLevelRepo = characterLevelRepo;
         this.messageSource = messageSource;
     }
 
@@ -62,7 +66,7 @@ public class CharacterService {
         character.setSex(characterBaseReq.getSex());
         character.setDamage(characterBaseReq.getDamage());
         character.setHealth(characterBaseReq.getHealth());
+        character.setCharacterLevel(characterLevelRepo.getOne(characterBaseReq.getCharacterLevel()));
     }
-
 
 }

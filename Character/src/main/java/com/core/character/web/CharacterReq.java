@@ -1,10 +1,15 @@
 package com.core.character.web;
 
 import com.core.character.Sex;
+import com.core.characterLevel.CharacterLevel;
+import com.core.characterLevel.CharacterLevelRepo;
 
 import javax.validation.constraints.NotEmpty;
 
 public class CharacterReq {
+
+    private final CharacterLevelRepo characterLevelRepo;
+
     @NotEmpty
     private String name;
     @NotEmpty
@@ -13,6 +18,12 @@ public class CharacterReq {
     private float health;
 
     private float damage;
+
+    private CharacterLevel characterLevel;
+
+    public CharacterReq(CharacterLevelRepo characterLevelRepo) {
+        this.characterLevelRepo = characterLevelRepo;
+    }
 
     public String getName() {
         return name;
@@ -44,5 +55,13 @@ public class CharacterReq {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public Integer getCharacterLevel() {
+        return characterLevel.getId();
+    }
+
+    public void setCharacterLevel(Integer characterLevel) {
+        this.characterLevel = characterLevelRepo.getOne(characterLevel);
     }
 }

@@ -90,8 +90,6 @@ public class CharacterController {
     }
 
 
-
-
     @GetMapping
         @ResponseBody
         public Page <CharacterView> getAllCharacter(@PageableDefault(sort = "id",

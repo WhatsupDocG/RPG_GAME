@@ -13,6 +13,8 @@ public class CharacterView {
 
     private float damage;
 
+    private String characterLevel;
+
     public Integer getId() {
         return id;
     }
@@ -53,5 +55,13 @@ public class CharacterView {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public String getCharacterLevel() {
+        return characterLevel;
+    }
+
+    public void setCharacterLevel(String characterLevel) {
+        this.characterLevel = characterLevel;
     }
 }
