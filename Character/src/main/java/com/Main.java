@@ -26,7 +26,7 @@ public class Main {
     @Bean
     public AsyncRestTemplate asyncRestTemplate(RestTemplateBuilder restTemplateBuilder) {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setTaskExecutor(asyncTaskExecutor()); // Установка executor для выполнения асинхронных задач
+        requestFactory.setTaskExecutor(asyncTaskExecutor());
 
         return new AsyncRestTemplate(requestFactory, restTemplateBuilder.build());
     }

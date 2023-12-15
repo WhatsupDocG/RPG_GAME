@@ -26,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping(value = "/character")
-@CrossOrigin(origins = "file:///C:/Users/silve/Downloads/Destiny/public_html/index.html")
+@CrossOrigin(origins = "http://localhost:8383")
 public class CharacterController {
         private final CharacterService service;
         private final CharacterConverter converter;
@@ -40,11 +40,13 @@ public class CharacterController {
         public CharacterController(CharacterService service,
                                   MessageSource messageSource,
                                    CharacterConverter converter,
-                                   RestTemplate restTemplate) {
+                                   RestTemplate restTemplate,
+                                   CallBackService callbackService) {
             this.service = service;
             this.messageSource = messageSource;
             this.converter = converter;
             this.restTemplate = restTemplate;
+            this.callbackService = callbackService;
         }
 
         @GetMapping("/{id}")
