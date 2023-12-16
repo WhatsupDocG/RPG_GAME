@@ -140,13 +140,14 @@ function fetchCharacters() {
       console.log('Полученные данные о предметах персонажа:', data);
 
       // Очищаем tbody перед добавлением новых данных
-      tbody.innerHTML = '';
+      tbodyItems.innerHTML = '';
 
+      console.log(data);
       // Проверяем наличие свойства content и его тип (массив)
-      if (data.content && Array.isArray(data.content)) {
+      if (data && Array.isArray(data)) {
         // Используем data.content вместо data
-        data.content.forEach(character => {
-          addCharacter(character);
+        data.forEach(item => {
+          addItem(item);
         });
       } else {
         console.error('Неверный формат данных о предметах');
@@ -160,18 +161,18 @@ function fetchCharacters() {
 }
 
 // Функция добавления персонажа в таблицу и привязки обработчиков событий
-function addCharacterToTable(character, eventHandlers) {
+function addCharacterToTable(item, eventHandlers) {
   const newRow = CreateElement('tr');
 
   // Создаем ячейки и заполняем данными о персонаже
-  for (let key in character) {
+  for (let key in item) {
     const newCell = CreateElement('td');
-    newCell.innerHTML = character[key];
+    newCell.innerHTML = item[key];
     newRow.appendChild(newCell);
   }
 
   // Присваиваем строке идентификатор, чтобы можно было легко найти ее позже
-  newRow.setAttribute('data-character-id', character.id);
+  newRow.setAttribute('data-item-id', item.id);
 
   // Добавление обработчиков событий для нового элемента
   if (eventHandlers && typeof eventHandlers === 'function') {
@@ -179,11 +180,11 @@ function addCharacterToTable(character, eventHandlers) {
   }
 
   // Добавляем строку в таблицу
-  table.appendChild(newRow);
+  tableItems.appendChild(newRow);
 }
 
 // Функция добавления персонажа в таблицу
-function addCharacter(character) {
+function addItem(item) {
   // Функция обработчиков событий для нового элемента
   const eventHandlers = function (row) {
     row.addEventListener("mouseover", function() {
@@ -202,7 +203,7 @@ function addCharacter(character) {
   };
 
   // Вызываем функцию добавления персонажа в таблицу с передачей обработчиков событий
-  addCharacterToTable(character, eventHandlers);
+  addCharacterToTable(item, eventHandlers);
 }
 
 // Вызываем функцию для получения данных о персонажах
@@ -293,13 +294,13 @@ function CreateItemTableHead() {
     heading_2.innerHTML = "Name";
     
     let heading_3 = CreateElement('th');
-    heading_3.innerHTML = "Level";
+    heading_3.innerHTML = "Damage";
     
     let heading_4 = CreateElement('th');
-    heading_4.innerHTML = "Damage";
+    heading_4.innerHTML = "Armor";
     
     let heading_5 = CreateElement('th');
-    heading_5.innerHTML = "Armour";
+    heading_5.innerHTML = "Level";
     
     rowArrItems[0].appendChild(heading_1);
     rowArrItems[0].appendChild(heading_2);

@@ -45,7 +45,6 @@ public class Item {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -53,7 +52,6 @@ public class Item {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -61,7 +59,6 @@ public class Item {
     public float getArmor() {
         return armor;
     }
-
     public void setArmor(float armor) {
         this.armor = armor;
     }
@@ -69,7 +66,6 @@ public class Item {
     public float getDamage() {
         return damage;
     }
-
     public void setDamage(float damage) {
         this.damage = damage;
     }
@@ -77,7 +73,6 @@ public class Item {
     public Integer getCharacterId() {
         return characterId;
     }
-
     public void setCharacterId(Integer characterId) {
         this.characterId = characterId;
     }
@@ -85,7 +80,6 @@ public class Item {
     public ItemLevel getItemLevel() {
         return itemLevel;
     }
-
     public void setItemLevel(ItemLevel itemLevel) {
         this.itemLevel = itemLevel;
     }
@@ -93,7 +87,6 @@ public class Item {
     public ItemType getItemType() {
         return itemType;
     }
-
     public void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }

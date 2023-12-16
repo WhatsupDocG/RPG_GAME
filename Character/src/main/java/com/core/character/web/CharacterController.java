@@ -60,7 +60,7 @@ public class CharacterController {
         @PathVariable Long characterId,
         @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 
-        String secondMicroserviceUrl = "http://localhost:9102/character/character/getItems/"+ characterId;
+        String secondMicroserviceUrl = "http://localhost:9102/item/item/getItems/"+ characterId;
 
         CompletableFuture<ResponseEntity<List<Object>>> futureResponse = CompletableFuture.supplyAsync(() -> {
             try {

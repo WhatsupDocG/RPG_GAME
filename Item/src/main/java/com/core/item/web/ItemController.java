@@ -55,48 +55,6 @@ public class ItemController {
                     .map(converter::convert);
         }
 
-    @Async
-    @GetMapping("/getItems/{characterId}")
-    public CompletableFuture<List<ItemView>> getItemsByCharacterId(
-            @PathVariable Integer characterId,
-            @PageableDefault(sort = "id",
-            direction = Sort.Direction.ASC) Pageable pageable) {
-
-        CompletableFuture<List<ItemView>> future = CompletableFuture.supplyAsync(() -> {
-            CompletableFuture.runAsync(() -> callbackService.onSecondMicroserviceProcessed("Request accepted"));
-
-            List<Item> items = service.getItemByCharacterId(characterId, pageable);
-
-            List<ItemView> itemViews = items.stream()
-                    .map(converter::convert)
-                    .collect(Collectors.toList());
-
-            return itemViews;
-        });
-
-        return future.thenComposeAsync(result ->
-                CompletableFuture.supplyAsync(() -> {
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    return result;
-                })
-        );
-    }
-
-
-
-
-
-    @PostMapping("/receiveItemsPage")
-        public ResponseEntity<String> receiveItemsPage(@RequestBody Page<ItemView> itemsPage) {
-            return ResponseEntity.ok("OK");
-
-        }
-
     @PostMapping
         @ResponseStatus(HttpStatus.CREATED)
         @ResponseBody
@@ -128,4 +86,24 @@ public class ItemController {
             }
         }
 
+    @Async
+    @GetMapping("/getItems/{characterId}")
+    public CompletableFuture<List<ItemView>> getItemsByCharacterId(
+            @PathVariable Integer characterId,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+
+        CompletableFuture<List<ItemView>> future = CompletableFuture.supplyAsync(() -> {
+            CompletableFuture.runAsync(() -> callbackService.onSecondMicroserviceProcessed("Request accepted"));
+
+            List<Item> items = service.getItemByCharacterId(characterId, pageable);
+
+            List<ItemView> itemViews = items.stream()
+                    .map(converter::convert)
+                    .collect(Collectors.toList());
+
+            return itemViews;
+        });
+
+        return future;
     }
+}

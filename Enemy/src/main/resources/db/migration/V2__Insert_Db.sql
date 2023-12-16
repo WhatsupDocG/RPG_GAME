@@ -1,11 +1,14 @@
-INSERT INTO rpg_enemy (name, damage,armor,enemy_level_id,enemy_type_id)
+INSERT INTO rpg_enemy (name, health, damage, enemy_level_id, enemy_type_id, location_id)
 VALUES
-('sword', 30,0,1,1);
+('Spider', 40, 20, 1, 1, 1),
+('Orc', 70, 30, 2, 2, 2);
 
 INSERT INTO rpg_enemy_type (name)
 VALUES
-    ('weapon');
+    ('spiders'),
+    ('orcs');
 
 INSERT INTO rpg_enemy_level (name)
 VALUES
-    ('usual');
+    ('usual'),
+    ('boss');
