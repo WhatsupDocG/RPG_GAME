@@ -22,13 +22,10 @@ const portrait = CreateImg('../../img/Character/portret.jpg',
     "Avatar's character", "portrait");
 portraitDataDiv.appendChild(portrait);
 
-
-
-  
-const nameLabel = CreateLabel('h2', 'Name: ' + gcn(), '', "portraitData");
+const nameLabel = CreateLabel('h2', 'Name: ' + getUrlName(), '', "portraitData");
 portraitDataDiv.appendChild(nameLabel);
 
-const levelLabel = CreateLabel('h2', 'Level: 22', '', "portraitData");
+const levelLabel = CreateLabel('h2', 'Level: '+getUrlLevel(), '', "portraitData");
 portraitDataDiv.appendChild(levelLabel);
 
 

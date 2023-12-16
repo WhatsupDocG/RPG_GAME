@@ -28,30 +28,25 @@ function getUrlID() {
       return searchParams.get('id');
 }
 
-async function getCharacterName(id) {
-  const backendUrl = 'http://localhost:9101/character/character/' + id;
-  
-  try {
-    const response = await fetch(backendUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+function getUrlName() {   
+      // Получаем текущий URL страницы
+      let currentUrl = new URL(window.location.href);
+      // Получаем параметры из строки запроса
+      let searchParams = new URLSearchParams(currentUrl.search);
 
-    if (!response.ok) {
-      throw new Error('Ошибка при получении данных');
-    }
-
-    const data = await response.json();
-    return data.name;
-  } catch (error) {
-    console.error(error);
-    return null; // или любое другое значение по умолчанию
-  }
+      return searchParams.get('name');
 }
 
-function fetchTableData(url, id, innerId, strUrl, table) {
+function getUrlLevel() {   
+      // Получаем текущий URL страницы
+      let currentUrl = new URL(window.location.href);
+      // Получаем параметры из строки запроса
+      let searchParams = new URLSearchParams(currentUrl.search);
+
+      return searchParams.get('level');
+}
+
+function fetchTableData(url, attributes, innerId, strUrl, table) {
   // URL бэкенда, который предоставляет данные о персонажах
   let chId = getUrlID();
   const backendUrl = url + chId;
@@ -78,7 +73,8 @@ function fetchTableData(url, id, innerId, strUrl, table) {
       if (data && Array.isArray(data)) {
         // Используем data.content вместо data
         data.forEach(item => {
-          addStrData(item, id, innerId, strUrl, table);
+            let id = attributes[0];
+            addStrData(item, [id, item.name, item.level], innerId, strUrl, table);
         });
       } else {
         console.error('Неверный формат данных');
@@ -112,13 +108,13 @@ function fetchTableDataContent(url, id, strUrl, table) {
         console.log('Полученные данные:', data);
 
         // Очищаем tbody перед добавлением новых данных
-        tbody.innerHTML = '';
+        //tbody.innerHTML = '';
 
         // Проверяем наличие свойства content и его тип (массив)
         if (data.content && Array.isArray(data.content)) {
           // Используем data.content вместо data
           data.content.forEach(character => {
-            addStrData(character, id, id, strUrl, table);
+            addStrData(character, [id, character.name, character.characterLevel], id, strUrl, table);
           });
         } else {
           console.error('Неверный формат данных');
@@ -155,7 +151,7 @@ function addStrDataToTable(character, eventHandlers, id, table) {
 }
 
 // Функция добавления персонажа в таблицу
-function addStrData(character, id, innerId, strUrl, table) {
+function addStrData(character, attributes, innerId, strUrl, table) {
     // Функция обработчиков событий для нового элемента
     const eventHandlers = function (row) {
       row.addEventListener("mouseover", function() {
@@ -168,9 +164,15 @@ function addStrData(character, id, innerId, strUrl, table) {
 
       row.addEventListener("click", function() {
         // Получаем id персонажа из атрибута данных
-        let characterId = this.getAttribute(id);
-        let characterName = this.getAttribute('data-character-name');
-        window.location.href = strUrl + characterId + "&name=" +characterName;
+        let characterId = this.getAttribute(attributes[0]);
+        let name = "";
+        let level = "";
+        if (attributes[1] != "")
+            name = "&name=" + attributes[1];
+        if (attributes[2] != "")
+            level = "&level=" + attributes[2];
+        
+        window.location.href = strUrl + characterId + name + level;
       });
     };
 
