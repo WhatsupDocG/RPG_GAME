@@ -111,6 +111,39 @@ public class CharacterController {
 
         callbackService.onSecondMicroserviceProcessed("Request sent");
 
+        CompletableFuture<ResponseEntity<Object>> futureSpells = futureResponse.thenApply(responseEntity -> {
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                Object result = responseEntity.getBody();
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.status(responseEntity.getStatusCode()).<Object>body(null);
+            }
+        });
+
+        return futureSpells;
+    }
+
+    @GetMapping("/getLocation/{locationId}")
+    public CompletableFuture<ResponseEntity<Object>> getLocation(
+            @PathVariable Long locationId){
+
+        String secondMicroserviceUrl = "http://localhost:9104/location/location/getLocationById/"+ locationId;
+
+        CompletableFuture<ResponseEntity<?>> futureResponse = CompletableFuture.supplyAsync(() -> {
+            try {
+                return restTemplate.exchange(
+                        secondMicroserviceUrl,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<Object>() {}
+                );
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<List<Object>>body(null);
+            }
+        });
+
+        callbackService.onSecondMicroserviceProcessed("Request sent");
+
         CompletableFuture<ResponseEntity<Object>> futureItems = futureResponse.thenApply(responseEntity -> {
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 Object result = responseEntity.getBody();

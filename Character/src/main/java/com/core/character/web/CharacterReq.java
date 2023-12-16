@@ -17,6 +17,8 @@ public class CharacterReq {
     private float damage;
     private CharacterLevel characterLevel;
 
+    private Integer locationId;
+
     public CharacterReq(CharacterLevelRepo characterLevelRepo) {
         this.characterLevelRepo = characterLevelRepo;
     }
@@ -56,4 +58,11 @@ public class CharacterReq {
         this.characterLevel = characterLevelRepo.getOne(characterLevel);
     }
 
+    public Integer getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
+    }
 }

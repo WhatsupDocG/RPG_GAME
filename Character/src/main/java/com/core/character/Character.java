@@ -36,6 +36,9 @@ public class Character {
     @Column(name = "damage")
     private float damage;
 
+    @Column(name = "location_id")
+    private Integer locationId;
+
     @ManyToOne
     private CharacterLevel characterLevel;
 
@@ -77,6 +80,14 @@ public class Character {
 
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public Integer getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
     }
 
     public CharacterLevel getCharacterLevel() {

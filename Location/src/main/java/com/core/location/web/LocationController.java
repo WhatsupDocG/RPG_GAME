@@ -15,12 +15,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/location")
@@ -54,6 +56,22 @@ public class LocationController {
             checkNull(location, id);
             return converter.convert(location);
         }
+
+    @Async
+    @GetMapping("getLocationById/{locationId}")
+    public CompletableFuture<LocationView> getLocationById(
+            @PathVariable Integer locationId,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+
+        CompletableFuture<LocationView> future = CompletableFuture.supplyAsync(() -> {
+            CompletableFuture.runAsync(() -> callbackService.onSecondMicroserviceProcessed("Request accepted"));
+
+            Location location = service.getLocationById(locationId);
+            return  converter.convert(location);
+        });
+
+        return future;
+    }
 
     @GetMapping("/getEnemies/{locationId}")
     public CompletableFuture<ResponseEntity<Object>> getItems(

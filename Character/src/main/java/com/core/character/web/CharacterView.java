@@ -51,5 +51,4 @@ public class CharacterView {
     public void setCharacterLevel(String characterLevel) {
         this.characterLevel = characterLevel;
     }
-
 }
