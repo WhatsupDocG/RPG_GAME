@@ -55,7 +55,6 @@ public class Character {
         this.name = name;
     }
 
-
     public Sex getSex() {
         return sex;
     }
@@ -63,7 +62,6 @@ public class Character {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
-
 
     public float getHealth() {
         return health;
