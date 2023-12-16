@@ -1,5 +1,5 @@
 body {
-  background-image: url("../img/bg.jpg");
+  background-image: url("../img/menu.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -16,9 +16,11 @@ body {
 #mainLabel {
     text-align: right;
     margin-top: 10%;
-    margin-right: 15%;
+    margin-right: 12%;
     margin-bottom: 4%;
     text-decoration: underline;
+    font-size: 50px;
+    color: gold;
 }
 
 .controlButtons {

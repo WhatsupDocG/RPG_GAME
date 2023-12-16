@@ -14,5 +14,4 @@ public class SpellTypeConverter implements Converter<SpellType, SpellTypeView> {
         view.setName(spellType.getName());
         return view;
     }
-
 }

@@ -9,11 +9,11 @@ public class ItemView {
 
     private float armor;
 
-    private Integer itemType;
+    //private Integer itemType;
 
     private Integer itemLevel;
 
-    private Integer characterId;
+    //private Integer characterId;
 
     public Integer getId() {
         return id;
@@ -39,7 +39,7 @@ public class ItemView {
         this.damage = damage;
     }
 
-    public Integer getCharacterId() {
+    /*public Integer getCharacterId() {
         return characterId;
     }
 
@@ -53,7 +53,7 @@ public class ItemView {
 
     public void setItemType(Integer itemType) {
         this.itemType = itemType;
-    }
+    }*/
 
     public Integer getItemLevel() {
         return itemLevel;

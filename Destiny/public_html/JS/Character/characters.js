@@ -68,143 +68,13 @@ CreateTableHead();
 thead.appendChild(rowArr[0]);
 
 
-/////////////////////////////////////////////
-//Functions of table
-function GetValue(param)
-{
-    return document.getElementById(param).value;
-}
-
-function ReturnValue(index)
-{
-    let mas = ['cell1', 'cell2', 'cell3', 'cell4', 'cell5', 'cell6'];
-    return mas[index];
-}
-  
- function addCharacter() {   
-     
-    rowArr[amount] = CreateElement('tr');
-    rowArr[amount].cell1 = CreateElement('td');
-    rowArr[amount].cell1.innerHTML = amount;
-    
-    rowArr[amount].cell2 = CreateElement('td');
-    rowArr[amount].cell2.innerHTML = "Fastage";
-    
-    rowArr[amount].cell3 = CreateElement('td');
-    rowArr[amount].cell3.innerHTML = "Male";
-    
-    rowArr[amount].cell4 = CreateElement('td');
-    rowArr[amount].cell4.innerHTML = 101;
-    
-    rowArr[amount].cell5 = CreateElement('td');
-    rowArr[amount].cell5.innerHTML = 30;
-    
-    rowArr[amount].cell6 = CreateElement('td');
-    rowArr[amount].cell6.innerHTML = 20;
-    
-    // ПРОВЕРОЧКА  
-/*    if (amount >= 2)
-    {
-        for (var i = 1; i < amount; i++) {
-            console.log(typeof(Number(rowArr[i].cell4.innerHTML)) + 
-                    Number(rowArr[i].cell4.innerHTML));
-            if (Number(rowArr[i].cell2.innerHTML) === "")
-            {
-            alert("Такое значение уже есть в таблице");
-            return;
-            }   
-        }
-    }
- */
-    
-    // Добавление обработчиков событий для нового элемента
-    rowArr[amount].addEventListener("mouseover", function() {
-      this.classList.add("over");
-    });
-    
-    rowArr[amount].addEventListener("mouseout", function() {
-      this.classList.remove("over");
-    });
-    
-    rowArr[amount].addEventListener("click", function() {
-      window.location.href = '../../html/Character/character.html';
-    });
-  
-    //Добавление в таблицу значений(прикрепление?)
-    rowArr[amount].appendChild(rowArr[amount].cell1);
-    rowArr[amount].appendChild(rowArr[amount].cell2);
-    rowArr[amount].appendChild(rowArr[amount].cell3);
-    rowArr[amount].appendChild(rowArr[amount].cell4);
-    rowArr[amount].appendChild(rowArr[amount].cell5);
-    rowArr[amount].appendChild(rowArr[amount].cell6);
-    tbody.appendChild(rowArr[amount]);
-    
-
-    amount++;
- }
- 
-// Функция, отправляющая запрос на бэкенд и обрабатывающая полученные данные
-function fetchCharacters() {
-  // URL бэкенда, который предоставляет данные о персонажах
-  const backendUrl = 'http://localhost:9101/character/character';
-
-  // Опции запроса
-  const requestOptions = {
-    type: 'GET',
-    contentType: 'application/json'
-  };
-
-  // Отправляем GET-запрос на бэкенд
-  $.ajax({
-    url: backendUrl,
-    type: requestOptions.type,
-    contentType: requestOptions.contentType,
-    success: function (data) {
-      // Обработка данных, полученных от бэкенда
-      console.log('Полученные данные о персонажах:', data);
-
-      // Очищаем tbody перед добавлением новых данных
-      tbody.innerHTML = '';
-
-      // Проверяем наличие свойства content и его тип (массив)
-      if (data.content && Array.isArray(data.content)) {
-        // Используем data.content вместо data
-        data.content.forEach(character => {
-          addCharacterToTable(character);
-        });
-      } else {
-        console.error('Неверный формат данных о персонажах');
-      }
-    },
-    error: function (error) {
-      // Обработка ошибок при выполнении запроса
-      console.error('Ошибка при получении данных:', error);
-    }
-  });
-}
-
-// Функция добавления персонажа в таблицу
-function addCharacterToTable(character) {
-  const newRow = CreateElement('tr');
-
-  // Создаем ячейки и заполняем данными о персонаже
-  for (let key in character) {
-    const newCell = CreateElement('td');
-    newCell.innerHTML = character[key];
-    newRow.appendChild(newCell);
-  }
-
-  // Добавляем строку в tbody таблицы
-  table.appendChild(newRow); // Используем table вместо tbody
-}
-
-
-// Вызываем функцию для получения данных о персонажах
-fetchCharacters();
-
-
-//addCharacter();
-
+        //Attaching data to table
+fetchTableDataContent(
+        'http://localhost:9101/character/character',
+        'data-character-id', 
+        '../../html/Character/character.html?id=',
+        table
+);
 
 //Creating addCharacter button
 const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
@@ -219,6 +89,18 @@ function backToMenu() {
 }
 
 //////////////////////////////////
+////Functions of table
+function GetValue(param)
+{
+    return document.getElementById(param).value;
+}
+
+function ReturnValue(index)
+{
+    let mas = ['cell1', 'cell2', 'cell3', 'cell4', 'cell5', 'cell6'];
+    return mas[index];
+}
+
 //  Creating's elements functions
 function CreateTableHead() {
 

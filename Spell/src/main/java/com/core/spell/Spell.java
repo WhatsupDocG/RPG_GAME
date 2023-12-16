@@ -26,23 +26,21 @@ public class Spell {
     private Integer id;
     @Column(name="name")
     private String name;
-
     @Column(name = "damage")
     private float damage;
-
     @Column(name = "heal")
     private float heal;
-
     @ManyToOne
     private SpellLevel spellLevel;
-
     @ManyToOne
     private SpellType spellType;
+    @Column(name = "character_id")
+    private Integer characterId;
+
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -50,7 +48,6 @@ public class Spell {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -58,7 +55,6 @@ public class Spell {
     public float getHeal() {
         return heal;
     }
-
     public void setHeal(float heal) {
         this.heal = heal;
     }
@@ -66,7 +62,6 @@ public class Spell {
     public float getDamage() {
         return damage;
     }
-
     public void setDamage(float damage) {
         this.damage = damage;
     }
@@ -74,7 +69,6 @@ public class Spell {
     public SpellLevel getSpellLevel() {
         return spellLevel;
     }
-
     public void setSpellLevel(SpellLevel spellLevel) {
         this.spellLevel = spellLevel;
     }
@@ -82,8 +76,15 @@ public class Spell {
     public SpellType getSpellType() {
         return spellType;
     }
-
     public void setSpellType(SpellType spellType) {
         this.spellType = spellType;
     }
+
+    public Integer getCharacterId() {
+        return characterId;
+    }
+    public void setCharacterId(Integer characterId) {
+        this.characterId = characterId;
+    }
+
 }

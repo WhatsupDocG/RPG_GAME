@@ -34,7 +34,6 @@ public class SpellType {
     public List<Spell> getSpells() {
         return spells;
     }
-
     public void setSpells(List<Spell> spells) {
         this.spells = spells;
     }
@@ -51,7 +50,6 @@ public class SpellType {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -59,7 +57,6 @@ public class SpellType {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
