@@ -89,6 +89,39 @@ public class CharacterController {
         return futureItems;
     }
 
+    @GetMapping("/getSpells/{characterId}")
+    public CompletableFuture<ResponseEntity<Object>> getSpells(
+            @PathVariable Long characterId,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+
+        String secondMicroserviceUrl = "http://localhost:9103/spell/spell/getSpells/"+ characterId;
+
+        CompletableFuture<ResponseEntity<List<Object>>> futureResponse = CompletableFuture.supplyAsync(() -> {
+            try {
+                return restTemplate.exchange(
+                        secondMicroserviceUrl,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<List<Object>>() {}
+                );
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<List<Object>>body(null);
+            }
+        });
+
+        callbackService.onSecondMicroserviceProcessed("Request sent");
+
+        CompletableFuture<ResponseEntity<Object>> futureItems = futureResponse.thenApply(responseEntity -> {
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                Object result = responseEntity.getBody();
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.status(responseEntity.getStatusCode()).<Object>body(null);
+            }
+        });
+
+        return futureItems;
+    }
 
     @GetMapping
         @ResponseBody

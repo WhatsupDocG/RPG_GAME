@@ -10,7 +10,7 @@ public class EnemyReq {
     private float health;
     private float damage;
     private Integer enemyLevel;
-    private EnemyType enemyType;
+    private Integer enemyType;
     private Integer locationId;
 
     public String getName() {
@@ -41,10 +41,10 @@ public class EnemyReq {
         this.enemyLevel = enemyLevel;
     }
 
-    public EnemyType getEnemyType() {
+    public Integer getEnemyType() {
         return enemyType;
     }
-    public void setEnemyType(EnemyType enemyType) {
+    public void setEnemyType(Integer enemyType) {
         this.enemyType = enemyType;
     }
 

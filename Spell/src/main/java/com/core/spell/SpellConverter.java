@@ -15,7 +15,7 @@ public class SpellConverter implements Converter<Spell, SpellView> {
         view.setDamage(spell.getDamage());
         view.setHeal(spell.getHeal());
         view.setSpellLevel(spell.getSpellLevel().getId());
-        view.setSpellType(spell.getSpellType().getId());
+        //view.setSpellType(spell.getSpellType().getId());
         return view;
     }
 

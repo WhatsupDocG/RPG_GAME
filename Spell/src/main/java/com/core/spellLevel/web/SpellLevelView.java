@@ -2,13 +2,11 @@ package com.core.spellLevel.web;
 
 public class SpellLevelView {
     private Integer id;
-
     private String name;
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -16,7 +14,6 @@ public class SpellLevelView {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }

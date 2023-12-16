@@ -57,9 +57,9 @@ public class SpellTypeService {
         spellTypeRepo.save(spellType);
         return spellType;
     }
+
     public void prepareSpellType(SpellType spellType, SpellTypeReq spellTypeBaseReq){
         spellType.setName(spellTypeBaseReq.getName());
     }
-
 
 }

@@ -55,34 +55,25 @@ public class SpellController {
         }
 
     @Async
-    @GetMapping("/getSpells")
-    public CompletableFuture<List<SpellView>> getSpells(@PageableDefault(sort = "id",
-            direction = Sort.Direction.ASC) Pageable pageable) {
+    @GetMapping("/getSpells/{characterId}")
+    public CompletableFuture<List<SpellView>> getSpellsByCharacterId(
+            @PathVariable Integer characterId,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
         CompletableFuture<List<SpellView>> future = CompletableFuture.supplyAsync(() -> {
             CompletableFuture.runAsync(() -> callbackService.onSecondMicroserviceProcessed("Request accepted"));
 
-            List<SpellView> spells =  service.findAllSpell(pageable)
-                    .getContent()
-                    .stream()
+            List<Spell> spells = service.getSpellsByCharacterId(characterId, pageable);
+
+            List<SpellView> spellsViews = spells.stream()
                     .map(converter::convert)
                     .collect(Collectors.toList());
-            return spells;
+
+            return spellsViews;
         });
 
-        return future.thenComposeAsync(result ->
-                CompletableFuture.supplyAsync(() -> {
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    return result;
-                })
-        );
+        return future;
     }
-
 
     @PostMapping("/receiveSpellsPage")
         public ResponseEntity<String> receiveSpellsPage(@RequestBody Page<SpellView> spellsPage) {

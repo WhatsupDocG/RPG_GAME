@@ -57,9 +57,9 @@ public class SpellLevelService {
         spellLevelRepo.save(spellLevel);
         return spellLevel;
     }
+
     public void prepareSpellLevel(SpellLevel spellLevel, SpellLevelReq spellLevelBaseReq){
         spellLevel.setName(spellLevelBaseReq.getName());
     }
-
 
 }

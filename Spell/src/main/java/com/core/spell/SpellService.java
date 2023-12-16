@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class SpellService {
@@ -36,6 +37,10 @@ public class SpellService {
                 .orElseThrow(() -> new EntityNotFoundException(messageSource
                         .getMessage("com.core.web.SpellWithIdNotExists", new Object[]{id},
                                 LocaleContextHolder.getLocale())));
+    }
+
+    public List<Spell> getSpellsByCharacterId(Integer id, Pageable pageable){
+        return spellRepo.findSpellsByCharacterId(id);
     }
 
     public Page<Spell> findAllSpell(Pageable pageable){

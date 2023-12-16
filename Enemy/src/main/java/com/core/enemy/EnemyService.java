@@ -1,5 +1,6 @@
 package com.core.enemy;
 
+import com.core.EnemyType.EnemyTypeRepo;
 import com.core.enemy.web.EnemyReq;
 import com.core.EnemyLevel.EnemyLevelRepo;
 import org.springframework.context.MessageSource;
@@ -18,13 +19,16 @@ public class EnemyService {
 
     private final EnemyRepo enemyRepo;
     private final EnemyLevelRepo enemyLevelRepo;
+    private final EnemyTypeRepo enemyTypeRepo;
     private final MessageSource messageSource;
 
     public EnemyService(EnemyRepo enemyRepo,
                             EnemyLevelRepo enemyLevelRepo,
+                            EnemyTypeRepo enemyTypeRepo,
                             MessageSource messageSource){
         this.enemyRepo = enemyRepo;
         this.enemyLevelRepo = enemyLevelRepo;
+        this.enemyTypeRepo = enemyTypeRepo;
         this.messageSource = messageSource;
     }
 
@@ -71,7 +75,7 @@ public class EnemyService {
         enemy.setDamage(enemyBaseReq.getDamage());
         enemy.setHealth(enemyBaseReq.getHealth());
         enemy.setEnemyLevel(enemyLevelRepo.getOne(enemyBaseReq.getEnemyLevel()));
-        enemy.setEnemyType(enemyBaseReq.getEnemyType());
+        enemy.setEnemyType(enemyTypeRepo.getOne(enemyBaseReq.getEnemyType()));
         enemy.setLocationId(enemyBaseReq.getLocationId());
     }
 
