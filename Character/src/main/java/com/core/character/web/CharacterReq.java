@@ -15,7 +15,7 @@ public class CharacterReq {
     private Sex sex;
     private float health;
     private float damage;
-    private CharacterLevel characterLevel;
+    private Integer characterLevel;
 
     private Integer locationId;
 
@@ -52,10 +52,10 @@ public class CharacterReq {
     }
 
     public Integer getCharacterLevel() {
-        return characterLevel.getId();
+        return characterLevel;
     }
     public void setCharacterLevel(Integer characterLevel) {
-        this.characterLevel = characterLevelRepo.getOne(characterLevel);
+        this.characterLevel = characterLevel;
     }
 
     public Integer getLocationId() {
