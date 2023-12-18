@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/enemy")
+@CrossOrigin(origins = "http://localhost:8383")
 public class EnemyController {
     private final EnemyService service;
     private final EnemyConverter converter;

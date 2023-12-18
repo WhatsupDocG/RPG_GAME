@@ -73,9 +73,10 @@ th, td{
     border: 1px solid black;
     color: black;
 }
-
-tr.highlighted {
-    background-color: yellow; /* или любой другой цвет */
+.over {
+  background-color: graytext; /* Темно-серый цвет */
+  color: #fff; /* Белый цвет текста, чтобы текст был виден на темном фоне */
+  /* Дополнительные стили по вашему желанию */
 }
 
     /* Bottom buttons */

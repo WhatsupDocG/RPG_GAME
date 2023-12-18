@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="RPG_GAME (1)" />
+        <module name="RPG_GAME (2)" />
+        <module name="RPG_GAME (3)" />
+        <module name="RPG_GAME (4)" />
+        <module name="RPG_GAME (5)" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RPG_GAME" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RPG_GAME" options="-parameters" />
+      <module name="RPG_GAME (1)" options="-parameters" />
+      <module name="RPG_GAME (2)" options="-parameters" />
+      <module name="RPG_GAME (3)" options="-parameters" />
+      <module name="RPG_GAME (4)" options="-parameters" />
+      <module name="RPG_GAME (5)" options="-parameters" />
+    </option>
+  </component>
+</project>

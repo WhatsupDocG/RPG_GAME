@@ -54,7 +54,7 @@ public class CharacterLevelController {
 
         @DeleteMapping("/{id}")
         @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteCharacterLevel(@PathVariable Integer id){
+        public void deleteCharacterLevel(@PathVariable Integer id) {
             CharacterLevel characterLevel = service.getCharacterLevelById(id);
             checkNull(characterLevel, id);
             service.deleteCharacterLevel(id);
@@ -62,7 +62,7 @@ public class CharacterLevelController {
 
         @PutMapping("/{id}")
         public CharacterLevelView updateCharacterLevel(@PathVariable(name = "id") Integer id,
-                                                  @RequestBody @Valid CharacterLevelReq req){
+                                                       @RequestBody @Valid CharacterLevelReq req) {
             CharacterLevel characterLevel = service.getCharacterLevelById(id);
             checkNull(characterLevel, id);
             return converter.convert(service.updateCharacterLevel(characterLevel, req));

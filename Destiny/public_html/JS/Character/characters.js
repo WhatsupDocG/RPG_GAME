@@ -5,11 +5,8 @@ const mainLabel = CreateLabel('h1', 'Characters', 'mainLabel', "firstStroke");
 div.appendChild(mainLabel);
 
 const backBtn = CreateButton('X', 'backButton', 'firstStroke');
-backBtn.addEventListener('click', () =>backToMenu());
+backBtn.addEventListener('click', () =>backToMainMenu());
 div.appendChild(backBtn);
-function backToMenu() {
-   window.location.href = '../../index.html';
-}
 
 const searchField = CreateInputText("Search", "searchField", "search");
 searchField.addEventListener('input', () =>Searching());
@@ -43,10 +40,7 @@ function Searching() {
     });
 }
 
-
-        //Create table //
-        
-//Table container
+        //Create table // 
 let tableDiv = CreateElement('div');
 tableDiv.id = "tableDiv";
 div.appendChild(tableDiv);
@@ -69,16 +63,25 @@ thead.appendChild(rowArr[0]);
 
 
         //Attaching data to table
-fetchTableDataContent(
-        'http://localhost:9101/character/character',
-        'data-character-id', 
-        '../../html/Character/character.html?id=',
-        table
+fetchTableData(
+    {
+    url: 'http://localhost:9101/character/character',
+    urlStroke: '../../html/Character/character.html?id=',
+    id: '',
+    innerId: 'data-character-id',
+    table: table,
+    levelName: 'characterLevel'
+    }
 );
 
 //Creating addCharacter button
 const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
 div.appendChild(addCharacterBtn);
+addCharacterBtn.addEventListener('click', () =>addCharacter());
+function addCharacter() {
+   window.location.href = '../../html/Character/addEditCharacter.html';
+   saveCurrentPage();
+}
 
 //Creating addCharacter button
 const backButton = CreateButton("Back", "backBtn", "Buttons");
@@ -89,18 +92,6 @@ function backToMenu() {
 }
 
 //////////////////////////////////
-////Functions of table
-function GetValue(param)
-{
-    return document.getElementById(param).value;
-}
-
-function ReturnValue(index)
-{
-    let mas = ['cell1', 'cell2', 'cell3', 'cell4', 'cell5', 'cell6'];
-    return mas[index];
-}
-
 //  Creating's elements functions
 function CreateTableHead() {
 
@@ -131,53 +122,3 @@ function CreateTableHead() {
     rowArr[0].appendChild(heading_6);
 }
 
-function CreateElement(param)
-{
-    return document.createElement(param);
-}
-
-function CreateButton(title, id, bClass) {
-    let button = document.createElement ('button');
-    button.innerText = title;
-    button.className = bClass;
-    button.id = id;
-    document.body.appendChild(button);
-    
-    return button;
-}
-
-function CreateInputText(title, id, bClass) {
-    let search = document.createElement ('input');
-    search.placeholder = title;
-    search.type = "text";
-    search.value = "";
-    search.className = bClass;
-    search.id = id;
-    search.autofocus = true;
-    document.body.appendChild(search);
-    
-    return search;
-}
-
-function CreateInputBtnOrSubmit(title, type, id, bClass) {
-    let search = document.createElement ('input');
-    search.placeholder = title;
-    search.type = type;
-    search.value = "";
-    search.title = title;
-    search.className = bClass;
-    search.id = id;
-    search.autofocus = true;
-    document.body.appendChild(search);
-    
-    return search;
-}
-
-function CreateLabel(type, title, id, className) {
-    let tableLabel = CreateElement(type);
-    tableLabel.textContent = title;
-    tableLabel.id = id;
-    tableLabel.className = className;
-    
-    return tableLabel;
-}

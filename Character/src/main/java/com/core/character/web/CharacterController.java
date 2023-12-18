@@ -157,42 +157,42 @@ public class CharacterController {
     }
 
     @GetMapping
-        @ResponseBody
-        public Page <CharacterView> getAllCharacter(@PageableDefault(sort = "id",
-                direction = Sort.Direction.ASC) Pageable pageable) {
-            return service.findAllCharacter(pageable)
-                    .map(converter::convert);
-        }
+    @ResponseBody
+    public Page <CharacterView> getAllCharacter(@PageableDefault(sort = "id",
+            direction = Sort.Direction.ASC) Pageable pageable) {
+        return service.findAllCharacter(pageable)
+                .map(converter::convert);
+    }
 
-        @PostMapping
-        @ResponseStatus(HttpStatus.CREATED)
-        @ResponseBody
-        public CharacterView createCharacter(@RequestBody @Valid CharacterReq req) {
-            return converter.convert(service.createCharacter(req));
-        }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public CharacterView createCharacter(@RequestBody @Valid CharacterReq req) {
+        return converter.convert(service.createCharacter(req));
+    }
 
-        @DeleteMapping("/{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteCharacter(@PathVariable Integer id){
-            Character character = service.getCharacterById(id);
-            checkNull(character, id);
-            service.deleteCharacter(id);
-        }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCharacter(@PathVariable Integer id){
+        Character character = service.getCharacterById(id);
+        checkNull(character, id);
+        service.deleteCharacter(id);
+    }
 
-        @PutMapping("/{id}")
-        public CharacterView updateCharacter(@PathVariable(name = "id") Integer id,
-                                           @RequestBody @Valid CharacterReq req){
-            Character character = service.getCharacterById(id);
-            checkNull(character, id);
-            return converter.convert(service.updateCharacter(character, req));
-        }
+    @PutMapping("/{id}")
+    public CharacterView updateCharacter(@PathVariable(name = "id") Integer id,
+                                       @RequestBody @Valid CharacterReq req){
+        Character character = service.getCharacterById(id);
+        checkNull(character, id);
+        return converter.convert(service.updateCharacter(character, req));
+    }
 
-        private void checkNull (Character character, Integer id) {
-            if (character == null) {
-                String message = messageSource.getMessage(
-                        "com.core.web.CharacterWithIdNotExists", new Object[]{id},
-                        LocaleContextHolder.getLocale());
-            }
+    private void checkNull (Character character, Integer id) {
+        if (character == null) {
+            String message = messageSource.getMessage(
+                    "com.core.web.CharacterWithIdNotExists", new Object[]{id},
+                    LocaleContextHolder.getLocale());
         }
+    }
 
 }

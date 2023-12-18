@@ -1,5 +1,5 @@
 const div = document.getElementById("control");
-saveCurrentPage();
+
 
     //Upper zone of window //
 const mainLabel = CreateLabel('h1', 'Location', 'mainLabel', "firstStroke");
@@ -7,8 +7,9 @@ div.appendChild(mainLabel);
 
 const backBtn = CreateButton('X', 'backButton', 'firstStroke');
 backBtn.addEventListener('click', () =>backToMenu());
+
 function backToMenu() {
-   window.location.href = 'characters.html';
+    goToPreviousPage();
 }
 div.appendChild(backBtn);
 
@@ -18,11 +19,11 @@ const portraitDataDiv = CreateElement('div');
 portraitDataDiv.className = "portraitDataDiv";
 div.appendChild(portraitDataDiv);
 
-const portrait = CreateImg('../../img/Character/portret.jpg',
+const portrait = CreateImg('../../img/Location/dessert.jpg',
     "Avatar's character", "portrait");
 portraitDataDiv.appendChild(portrait);
 
-const nameLabel = CreateLabel('h2', 'Name: Fastage', '', "portraitData");
+const nameLabel = CreateLabel('h2', 'Name: ' + getUrlName(), '', "portraitData");
 portraitDataDiv.appendChild(nameLabel);
 
     //Creating table //
@@ -31,8 +32,8 @@ tableLabelsDiv.id = 'tableLabelsDiv';
 div.appendChild(tableLabelsDiv);
 
 //Label
-const tableLabelItems = CreateLabel("h3", "Items:", "labelItems", "tableLabels");
-tableLabelsDiv.appendChild(tableLabelItems);
+const tableLabelEnemies = CreateLabel("h3", "Enemies:", "labelEnemies", "tableLabels");
+tableLabelsDiv.appendChild(tableLabelEnemies);
 
 
     //Table container
@@ -40,99 +41,26 @@ let tableDiv = CreateElement('div');
 tableDiv.id = "tableDiv";
 div.appendChild(tableDiv); 
 
-//Table
-let tableItems = CreateElement("table");
-let theadItems = CreateElement("thead");
-let tbodyItems = CreateElement("tbody");
-tableItems.appendChild(theadItems);
-tableItems.appendChild(tbodyItems);
-tableItems.id = "tableContainer";   
-tableDiv.appendChild(tableItems);
+
+let table = CreateElement("table");
+let thead = CreateElement("thead");
+let tbody = CreateElement("tbody");
+table.appendChild(thead);
+table.appendChild(tbody);
+table.id = "tableContainer";   
+tableDiv.appendChild(table);
 //Объявление Данных для ячеек таблицы
-let amountItems = 1;
-let currentAmountItems = 0;
-let rowArrItems = [];
+let amount = 1;
+let currentAmount = 0;
+let rowArr = [];
 //
 CreateItemTableHead();
-theadItems.appendChild(rowArrItems[0]);
+thead.appendChild(rowArr[0]);
 
-
-    //Functions of table
-function GetValue(param)
-{
-    return document.getElementById(param).value;
-}
-
-function ReturnValue(param)
-{
-    let mas = ['cell1', 'cell2', 'cell3', 'cell4'];
-    return mas[param];
-}
-  
-function addItem() {   
-     
-    rowArrItems[amountItems] = CreateElement('tr');
-    rowArrItems[amountItems].cell1 = CreateElement('td');
-    rowArrItems[amountItems].cell1.innerHTML = amountItems;
-    
-    rowArrItems[amountItems].cell2 = CreateElement('td');
-    rowArrItems[amountItems].cell2.innerHTML = "Sword";
-    
-    rowArrItems[amountItems].cell3 = CreateElement('td');
-    rowArrItems[amountItems].cell3.innerHTML = "5";
-    
-    rowArrItems[amountItems].cell4 = CreateElement('td');
-    rowArrItems[amountItems].cell4.innerHTML = "10";
-    
-    rowArrItems[amountItems].cell5 = CreateElement('td');
-    rowArrItems[amountItems].cell5.innerHTML = "0";
-    
-    
-    // Добавление обработчиков событий для нового элемента
-    rowArrItems[amountItems].addEventListener("mouseover", function() {
-      this.classList.add("over");
-    });
-    
-    rowArrItems[amountItems].addEventListener("mouseout", function() {
-      this.classList.remove("over");
-    });
-    
-    rowArrItems[amountItems].addEventListener("click", function() {
-      window.location.href = '../../html/Item/item.html';
-    });
-  
-    //Добавление в таблицу значений(прикрепление?)
-    rowArrItems[amountItems].appendChild(rowArrItems[amountItems].cell1);
-    rowArrItems[amountItems].appendChild(rowArrItems[amountItems].cell2);
-    rowArrItems[amountItems].appendChild(rowArrItems[amountItems].cell3);
-    rowArrItems[amountItems].appendChild(rowArrItems[amountItems].cell4);
-    rowArrItems[amountItems].appendChild(rowArrItems[amountItems].cell5);
-    tbodyItems.appendChild(rowArrItems[amountItems]);
-    
-
-    amountItems++;
- }
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-addItem();
-
-
-//Creating elements functions
-function CreateElement(param)
-{
-    return document.createElement(param);
-}
-
+ 
 function CreateItemTableHead() {
     
-    rowArrItems[0] = CreateElement('tr');
+    rowArr[0] = CreateElement('tr');
     let heading_1 = CreateElement('th');
     heading_1.innerHTML ="ID";
     
@@ -140,45 +68,28 @@ function CreateItemTableHead() {
     heading_2.innerHTML = "Name";
     
     let heading_3 = CreateElement('th');
-    heading_3.innerHTML = "Level";
+    heading_3.innerHTML = "Health";
     
     let heading_4 = CreateElement('th');
     heading_4.innerHTML = "Damage";
     
     let heading_5 = CreateElement('th');
-    heading_5.innerHTML = "Armour";
+    heading_5.innerHTML = "Level";
     
-    rowArrItems[0].appendChild(heading_1);
-    rowArrItems[0].appendChild(heading_2);
-    rowArrItems[0].appendChild(heading_3);
-    rowArrItems[0].appendChild(heading_4);
-    rowArrItems[0].appendChild(heading_5);
+    rowArr[0].appendChild(heading_1);
+    rowArr[0].appendChild(heading_2);
+    rowArr[0].appendChild(heading_3);
+    rowArr[0].appendChild(heading_4);
+    rowArr[0].appendChild(heading_5);
 }
 
-function CreateLabel(type, title, id, className) {
-    let tableLabel = CreateElement(type);
-    tableLabel.textContent = title;
-    tableLabel.id = id;
-    tableLabel.className = className;
-    
-    return tableLabel;
-}
-
-function CreateImg(src, alt, id) {
-    let portrait = CreateElement('img');
-    portrait.src = src;
-    portrait.alt = alt;
-    portrait.id = id;
-    
-    return portrait;
-}
-
-function CreateButton(title, id, bClass) {
-    let button = document.createElement ('button');
-    button.innerText = title;
-    button.className = bClass;
-    button.id = id;
-    document.body.appendChild(button);
-    
-    return button;
-}
+fetchTableData(
+    {
+    url: 'http://localhost:9104/location/location/getEnemies/',
+    urlStroke: '../../html/Enemy/enemy.html?id=',
+    id: true, 
+    innerId: 'data-enemy-id',
+    table: table,
+    levelName: 'enemyLevel'
+    }
+);

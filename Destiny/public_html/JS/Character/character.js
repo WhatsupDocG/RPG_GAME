@@ -1,6 +1,4 @@
-
 const div = document.getElementById("control");
-saveCurrentPage();
 
     //Upper zone of window //
 const mainLabel = CreateLabel('h1', 'Character', 'mainLabel', "firstStroke");
@@ -9,7 +7,7 @@ div.appendChild(mainLabel);
 const backBtn = CreateButton('X', 'backButton', 'firstStroke');
 backBtn.addEventListener('click', () =>backToMenu());
 function backToMenu() {
-   window.location.href = 'characters.html';
+   goToPreviousPage();
 }
 div.appendChild(backBtn);
 
@@ -42,7 +40,7 @@ tableLabelsDiv.appendChild(tableLabelSpells);
     //Table container
 let tableDiv = CreateElement('div');
 tableDiv.id = "tableDiv";
-div.appendChild(tableDiv); 
+div.appendChild(tableDiv);
 
 //Table
 let tableItems = CreateElement("table");
@@ -50,7 +48,7 @@ let theadItems = CreateElement("thead");
 let tbodyItems = CreateElement("tbody");
 tableItems.appendChild(theadItems);
 tableItems.appendChild(tbodyItems);
-tableItems.id = "tableContainer";   
+tableItems.id = "tableContainer";
 tableDiv.appendChild(tableItems);
 //Объявление Данных для ячеек таблицы
 let amountItems = 1;
@@ -75,43 +73,31 @@ let rowArrSpells = [];
 //
 CreateSpellTableHead();
 theadSpells.appendChild(rowArrSpells[0]);
- 
-  
-          //Attaching data to table//
+
 fetchTableData(
-        'http://localhost:9101/character/character/getItems/',
-        'data-character-id', 
-        'data-item-id', 
-        '../../html/Item/item.html?id=',
-        tableItems
+    {
+    url: 'http://localhost:9101/character/character/getItems/',
+    urlStroke: '../../html/Item/item.html?id=',
+    id: true, 
+    innerId: 'data-item-id',
+    table: tableItems,
+    levelName: 'itemLevel'
+    }
 );
 
 fetchTableData(
-        'http://localhost:9101/character/character/getSpells/',
-        'data-character-id', 
-        'data-spell-id', 
-        '../../html/Spell/spell.html?id=',
-        tableSpells
+    {
+    url: 'http://localhost:9101/character/character/getSpells/',
+    urlStroke: '../../html/Spell/spell.html?id=',
+    id: true, 
+    innerId: 'data-spell-id',
+    table: tableSpells,
+    levelName: 'spellLevel'
+    }
 );
 
 
 ////////////////////////////////////////////
-    //Functions of table
-function GetValue(param)
-{
-    return document.getElementById(param).value;
-}
-
-function ReturnValue(param)
-{
-    let mas = ['cell1', 'cell2', 'cell3', 'cell4'];
-    return mas[param];
-}
-//Creating elements functions
-function CreateElement(param)
-{
-    return document.createElement(param);
-}
 
 function CreateItemTableHead() {
     
@@ -162,32 +148,4 @@ function CreateSpellTableHead() {
     rowArrSpells[0].appendChild(heading_3);
     rowArrSpells[0].appendChild(heading_4);
     rowArrSpells[0].appendChild(heading_5);
-}
-
-function CreateLabel(type, title, id, className) {
-    let tableLabel = CreateElement(type);
-    tableLabel.textContent = title;
-    tableLabel.id = id;
-    tableLabel.className = className;
-    
-    return tableLabel;
-}
-
-function CreateImg(src, alt, id) {
-    let portrait = CreateElement('img');
-    portrait.src = src;
-    portrait.alt = alt;
-    portrait.id = id;
-    
-    return portrait;
-}
-
-function CreateButton(title, id, bClass) {
-    let button = document.createElement ('button');
-    button.innerText = title;
-    button.className = bClass;
-    button.id = id;
-    document.body.appendChild(button);
-    
-    return button;
 }

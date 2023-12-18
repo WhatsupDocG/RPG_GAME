@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/spell")
+@CrossOrigin(origins = "http://localhost:8383")
 public class SpellController {
         private final SpellService service;
         private final SpellConverter converter;

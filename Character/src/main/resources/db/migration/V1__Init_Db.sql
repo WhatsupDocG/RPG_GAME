@@ -23,6 +23,6 @@ CREATE SEQUENCE character_level_id_seq
     CACHE 1;
 
 CREATE TABLE rpg_character_level (
-                          id int4 NOT NULL DEFAULT nextval('character_level_id_seq'),
-                          name VARCHAR (255),
-                          PRIMARY KEY (id));
+    id int4 NOT NULL DEFAULT nextval('character_level_id_seq'),
+    name VARCHAR (255),
+    PRIMARY KEY (id));

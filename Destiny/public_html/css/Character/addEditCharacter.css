@@ -8,7 +8,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
 #control {
     background-color: whitesmoke;
     margin-top: 5%;
@@ -17,6 +16,7 @@ body {
     text-align: center;
 }
 
+    /* Upper string */
 .firstStroke {
     display: inline-block;   
     text-align: right;
@@ -37,21 +37,4 @@ body {
     color: black;
     background-color: crimson;
     font-size: 20px;
-}
-
-.portraitDataDiv {
-  display: flex;
-  align-items: start;
-  justify-content: flex-start;
-}
-#portrait {
-    margin-left: 6%;
-    margin-bottom: 6%;
-    width: 29%;
-}
-.portraitData {
-    font-size: 193%;
-    margin-left: 6%;
-    display: block;
-
 }

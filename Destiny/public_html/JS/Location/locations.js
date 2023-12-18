@@ -1,16 +1,12 @@
 const div = document.getElementById("control");
-saveCurrentPage();
 
         //Upper zone of window // (Label, search, backBtn)
 const mainLabel = CreateLabel('h1', 'Locations', 'mainLabel', "firstStroke");
 div.appendChild(mainLabel);
 
 const backBtn = CreateButton('X', 'backButton', 'firstStroke');
-backBtn.addEventListener('click', () =>backToMenu());
+backBtn.addEventListener('click', () =>backToMainMenu());
 div.appendChild(backBtn);
-function backToMenu() {
-   window.location.href = '../../index.html';
-}
 
 const searchField = CreateInputText("Search", "searchField", "search");
 searchField.addEventListener('input', () =>Searching());
@@ -45,10 +41,7 @@ function Searching() {
     });
 }
 
-
         //Create table //
-        
-//Table container
 let tableDiv = CreateElement('div');
 tableDiv.id = "tableDiv";
 div.appendChild(tableDiv);
@@ -68,84 +61,6 @@ let currentAmount = 0;
 let rowArr = [];
 CreateTableHead();
 thead.appendChild(rowArr[0]);
-
-
-/////////////////////////////////////////////
-//Functions of table
-function GetValue(param)
-{
-    return document.getElementById(param).value;
-}
-
-function ReturnValue(index)
-{
-    let mas = ['cell1', 'cell2', 'cell3', 'cell4', 'cell5', 'cell6'];
-    return mas[index];
-}
-  
- function addCharacter() {   
-     
-    rowArr[amount] = CreateElement('tr');
-    rowArr[amount].cell1 = CreateElement('td');
-    rowArr[amount].cell1.innerHTML = amount;
-    
-    rowArr[amount].cell2 = CreateElement('td');
-    rowArr[amount].cell2.innerHTML = "Fastage";
-    
-    rowArr[amount].cell3 = CreateElement('td');
-    rowArr[amount].cell3.innerHTML = "Male";
-    
-    rowArr[amount].cell4 = CreateElement('td');
-    rowArr[amount].cell4.innerHTML = 101;
-    
-    rowArr[amount].cell5 = CreateElement('td');
-    rowArr[amount].cell5.innerHTML = 30;
-    
-    rowArr[amount].cell6 = CreateElement('td');
-    rowArr[amount].cell6.innerHTML = 20;
-    
-    // ПРОВЕРОЧКА  
-/*    if (amount >= 2)
-    {
-        for (var i = 1; i < amount; i++) {
-            console.log(typeof(Number(rowArr[i].cell4.innerHTML)) + 
-                    Number(rowArr[i].cell4.innerHTML));
-            if (Number(rowArr[i].cell2.innerHTML) === "")
-            {
-            alert("Такое значение уже есть в таблице");
-            return;
-            }   
-        }
-    }
- */
-    
-    // Добавление обработчиков событий для нового элемента
-    rowArr[amount].addEventListener("mouseover", function() {
-      this.classList.add("over");
-    });
-    
-    rowArr[amount].addEventListener("mouseout", function() {
-      this.classList.remove("over");
-    });
-    
-    rowArr[amount].addEventListener("click", function() {
-      window.location.href = '../../html/Location/location.html';
-    });
-  
-    //Добавление в таблицу значений(прикрепление?)
-    rowArr[amount].appendChild(rowArr[amount].cell1);
-    rowArr[amount].appendChild(rowArr[amount].cell2);
-    rowArr[amount].appendChild(rowArr[amount].cell3);
-    rowArr[amount].appendChild(rowArr[amount].cell4);
-    rowArr[amount].appendChild(rowArr[amount].cell5);
-    rowArr[amount].appendChild(rowArr[amount].cell6);
-    tbody.appendChild(rowArr[amount]);
-    
-
-    amount++;
- }
-addCharacter();
-
 
 //Creating addCharacter button
 const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
@@ -170,73 +85,18 @@ function CreateTableHead() {
     let heading_2 = CreateElement('th');
     heading_2.innerHTML = "Name";
 
-    let heading_3 = CreateElement('th');
-    heading_3.innerHTML = "Sex";
-
-    let heading_4 = CreateElement('th');
-    heading_4.innerHTML = "Health";
-
-    let heading_5 = CreateElement('th');
-    heading_5.innerHTML = "Damage";
-    
-    let heading_6 = CreateElement('th');
-    heading_6.innerHTML = "Level";
-
     rowArr[0].appendChild(heading_1);
     rowArr[0].appendChild(heading_2);
-    rowArr[0].appendChild(heading_3);
-    rowArr[0].appendChild(heading_4);
-    rowArr[0].appendChild(heading_5);
-    rowArr[0].appendChild(heading_6);
 }
 
-function CreateElement(param)
-{
-    return document.createElement(param);
-}
-
-function CreateButton(title, id, bClass) {
-    let button = document.createElement ('button');
-    button.innerText = title;
-    button.className = bClass;
-    button.id = id;
-    document.body.appendChild(button);
-    
-    return button;
-}
-
-function CreateInputText(title, id, bClass) {
-    let search = document.createElement ('input');
-    search.placeholder = title;
-    search.type = "text";
-    search.value = "";
-    search.className = bClass;
-    search.id = id;
-    search.autofocus = true;
-    document.body.appendChild(search);
-    
-    return search;
-}
-
-function CreateInputBtnOrSubmit(title, type, id, bClass) {
-    let search = document.createElement ('input');
-    search.placeholder = title;
-    search.type = type;
-    search.value = "";
-    search.title = title;
-    search.className = bClass;
-    search.id = id;
-    search.autofocus = true;
-    document.body.appendChild(search);
-    
-    return search;
-}
-
-function CreateLabel(type, title, id, className) {
-    let tableLabel = CreateElement(type);
-    tableLabel.textContent = title;
-    tableLabel.id = id;
-    tableLabel.className = className;
-    
-    return tableLabel;
-}
+        //Attaching data to table
+fetchTableData(
+    {
+    url: 'http://localhost:9104/location/location',
+    urlStroke: '../../html/Location/location.html?id=',
+    id: '',
+    innerId: 'data-location-id',
+    table: table,
+    levelName: ''
+    }
+);

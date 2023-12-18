@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/item")
+@CrossOrigin(origins = "http://localhost:8383")
 public class ItemController {
         private final ItemService service;
         private final ItemConverter converter;

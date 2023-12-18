@@ -55,7 +55,8 @@ body {
     margin-left: 6%;
 }
 
-    /* Table data */
+   
+        /* Label data */
 .tableLabels {
     font-size: 30px;
     text-align: center;
@@ -73,6 +74,8 @@ body {
    flex: 1;
 }
 
+
+        /* Table data */
 #tableDiv {
     height: 400px;
     overflow: scroll;
@@ -96,4 +99,9 @@ th, td{
     padding: 15px 20px;
     border: 1px solid black;
     color: black;
+}
+.over {
+  background-color: graytext; /* Темно-серый цвет */
+  color: #fff; /* Белый цвет текста, чтобы текст был виден на темном фоне */
+  /* Дополнительные стили по вашему желанию */
 }

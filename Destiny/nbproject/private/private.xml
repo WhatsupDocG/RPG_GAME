@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Group 20221006-12:50:33"/>
         <group>
-            <file>file:/home/gollu/sites/Destiny/public_html/JS/Character/character.js</file>
-            <file>file:/home/gollu/sites/Destiny/public_html/JS/Character/characters.js</file>
-            <file>file:/home/gollu/sites/Destiny/public_html/JS/navigation.js</file>
+            <file>file:/home/gollu/sites/Destiny/public_html/JS/Spell/spells.js</file>
+            <file>file:/home/gollu/sites/Destiny/public_html/JS/Item/items.js</file>
+            <file>file:/home/gollu/sites/Destiny/public_html/css/Spell/spells.css</file>
+            <file>file:/home/gollu/sites/Destiny/public_html/html/Spell/spells.html</file>
         </group>
     </open-files>
 </project-private>

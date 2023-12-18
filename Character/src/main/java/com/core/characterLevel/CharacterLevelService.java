@@ -26,7 +26,7 @@ public class CharacterLevelService {
     public CharacterLevel getCharacterLevelById(Integer id){
         return characterLevelRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(messageSource
-                        .getMessage("com.core.web.CharacterLevelWithIdNotExists", new Object[]{id},
+                        .getMessage("com.core.web.LevelWithIdNotExists", new Object[]{id},
                                 LocaleContextHolder.getLocale())));
     }
 
