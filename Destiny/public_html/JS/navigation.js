@@ -8,16 +8,13 @@ function backToMainMenu() {
 
 let pageHistory = JSON.parse(localStorage.getItem('pageHistory')) || [];
 
-// Сохранение текущей страницы
 function saveCurrentPage() {
     const currentPage = window.location.href;
     pageHistory.push(currentPage);
     localStorage.setItem('pageHistory', JSON.stringify(pageHistory));
 }
 
-// Возвращение к предыдущей странице
 function goToPreviousPage() {
-
     //localStorage.removeItem('pageHistory');
     //pageHistory.length = 0;
 
@@ -34,6 +31,32 @@ function goToPreviousPage() {
         console.error('Previous page not found');
     }
     console.log(pageHistory);
+}
+
+function setUrlData(key, value) {
+    // Получаем текущий URL страницы
+    let currentUrl = new URL(window.location.href);
+    // Получаем параметры из строки запроса
+    let searchParams = new URLSearchParams(currentUrl.search);
+
+    // Устанавливаем новое значение параметра или добавляем новый параметр
+    searchParams.set(key, value);
+
+    // Обновляем строку запроса в URL
+    currentUrl.search = searchParams.toString();
+
+    // Заменяем текущий URL на новый
+    window.history.replaceState({}, '', currentUrl.href);
+}
+
+
+function getUrlData(key) {   
+      // Получаем текущий URL страницы
+      let currentUrl = new URL(window.location.href);
+      // Получаем параметры из строки запроса
+      let searchParams = new URLSearchParams(currentUrl.search);
+
+      return searchParams.get(key);
 }
 
 function getUrlID() {   
@@ -64,9 +87,8 @@ function getUrlLevel() {
 }
 
 function fetchTableData(Data) {
-    // URL бэкенда, который предоставляет данные о персонажах
-    const backendUrl = Data.id === '' ? Data.url : Data.url + getUrlID();
-
+    const backendUrl = Data.url;
+//Data.id === '' ? Data.url : Data.url + getUrlID()
     // Опции запроса
     const requestOptions = {
       type: 'GET',
@@ -79,9 +101,7 @@ function fetchTableData(Data) {
       type: requestOptions.type,
       contentType: requestOptions.contentType,
       success: function (data) {
-        // Обработка данных, полученных от бэкенда
         console.log('Полученные данные:', data);
-
         // Очищаем tbody перед добавлением новых данных
         //tbody.innerHTML = '';
 
@@ -98,8 +118,8 @@ function fetchTableData(Data) {
         
         if (resultData != "") {
             resultData.forEach(item => {
-                let eventHandlers = addStrData([item.id, item.name, 
-                    item[Data.levelName]], Data.urlStroke);
+                let is = item;
+                let eventHandlers = addStrData(Data.urlStroke, is);
                 
                 addStrDataToTable(item, eventHandlers, Data.innerId, Data.table);
             });
@@ -113,9 +133,8 @@ function fetchTableData(Data) {
     });
 }
 
-// Функция добавления персонажа в таблицу
-function addStrData(attributes, strUrl) {
-    // Функция обработчиков событий для нового элемента
+function addStrData(strUrl, item) {
+    
     const eventHandlers = function (row) {
       row.addEventListener("mouseover", function() {
         this.classList.add("over");
@@ -125,29 +144,28 @@ function addStrData(attributes, strUrl) {
         this.classList.remove("over");
       });
 
-      row.addEventListener("click", function() {
-        // Получаем id персонажа из атрибута данных
-        let characterId = attributes[0];
-        let name = "";
-        let level = "";
-        if (attributes[1] != "")
-            name = "&name=" + attributes[1];
-        if (attributes[2] != "")
-            level = "&level=" + attributes[2];
-        
-        saveCurrentPage();
-        window.location.href = strUrl + characterId + name + level;
+      row.addEventListener("click", function() { 
+            const is = item;
+            let url = "";
+            //for (let key in is) {
+            //    alert(key + " " + is[key]);
+            //}
+            
+            for (let key in is) {
+                url = url + key + '=' + is[key] + "&";
+            }
+
+            saveCurrentPage();
+            window.location.href = strUrl + url;
       });
     };
 
     return eventHandlers;
 }
 
-// Функция добавления персонажа в таблицу и привязки обработчиков событий
 function addStrDataToTable(character, eventHandlers, innerId, table) {
     const newRow = CreateElement('tr');
 
-    // Создаем ячейки и заполняем данными о персонаже
     for (let key in character) {
       const newCell = CreateElement('td');
       newCell.innerHTML = character[key];
@@ -156,12 +174,10 @@ function addStrDataToTable(character, eventHandlers, innerId, table) {
     
     newRow.setAttribute(innerId, character.id);
 
-    // Добавление обработчиков событий для нового элемента
     if (eventHandlers && typeof eventHandlers === 'function') {
       eventHandlers(newRow);
     }
 
-    // Добавляем строку в таблицу
     table.appendChild(newRow);
 }
 
@@ -224,4 +240,102 @@ function CreateImg(src, alt, id) {
     portrait.id = id;
     
     return portrait;
+}
+
+function CreateSelect(arr, id, className) {
+    const createCharacterUrl = document.createElement('select');
+    createCharacterUrl.id = id;
+    createCharacterUrl.className = className;
+
+    arr.forEach(item => {
+        const optionElement = document.createElement('option');
+        optionElement.value = item;
+        optionElement.text = item.charAt(0) + item.slice(1);
+        createCharacterUrl.add(optionElement);
+    });
+    
+    return createCharacterUrl;
+}
+
+function confirmDelete() {
+    const isConfirmed = confirm('Вы уверены, что хотите удалить персонажа?');
+
+    return isConfirmed;
+}
+
+function addData(data, url) {
+    // URL для создания нового персонажа
+    const createCharacterUrl = url;
+
+    // Опции запроса
+    const requestOptions = {
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+    };
+
+    $.ajax({
+        url: createCharacterUrl,
+        type: requestOptions.type,
+        contentType: requestOptions.contentType,
+        data: requestOptions.data,
+        success: function (data) {
+            // Обработка данных, полученных от бэкенда (в данном случае, нового персонажа)
+            console.log('Новые данные успешно добавлены:', data);
+        },
+        error: function (error) {
+            // Обработка ошибок при выполнении запроса
+            console.error('Ошибка при добавлении новых данных:', error);
+        }
+    });
+}
+
+function deleteData(id, url) {
+    // URL для удаления персонажа
+    const deleteCharacterUrl = url+id;
+
+    // Опции запроса
+    const requestOptions = {
+        type: 'DELETE',
+        contentType: 'application/json'
+    };
+
+    $.ajax({
+        url: deleteCharacterUrl,
+        type: requestOptions.type,
+        contentType: requestOptions.contentType,
+        success: function (data) {
+            // Обработка данных, полученных от бэкенда (в данном случае, ответа об успешном удалении)
+            console.log('Данные успешно удалены:', data);
+        },
+        error: function (error) {
+            // Обработка ошибок при выполнении запроса
+            console.error('Ошибка при удалении данных:', error);
+        }
+    });
+    goToPreviousPage();
+}
+
+function updateData(data, url) {
+    const updateCharacterUrl = url + data.id;
+
+    // Опции запроса
+    const requestOptions = {
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+    };
+
+    $.ajax({
+        url: updateCharacterUrl,
+        type: requestOptions.type,
+        contentType: requestOptions.contentType,
+        data: requestOptions.data,
+        success: function (data) {
+            console.log('Данные успешно обновлены:', data);
+        },
+        error: function (error) {
+            console.error('Ошибка при обновлении данных:', error);
+        }
+    });
 }

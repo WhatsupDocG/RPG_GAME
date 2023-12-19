@@ -2,7 +2,7 @@ const div = document.getElementById("control");
 
 
         //Upper zone of window // (Label, search, backBtn)
-const mainLabel = CreateLabel('h1', 'Characters', 'mainLabel', "firstStroke");
+const mainLabel = CreateLabel('h1', 'Edit character', 'mainLabel', "firstStroke");
 div.appendChild(mainLabel);
 
 const backBtn = CreateButton('X', 'backButton', 'firstStroke');
@@ -16,15 +16,15 @@ const newDiv = document.createElement('div');
 div.appendChild(newDiv);
 
 // Текстовые поля
-const labels = ['Name', 'Health', 'Damage', 'Sex', 'Level'];
+const labels = ['name', 'health', 'damage', 'sex', 'characterLevel'];
 
 for (let i = 0; i < labels.length; i++) {
-    if (labels[i] != 'Level') {
+    if (labels[i] != 'characterLevel') {
         let label = CreateLabel('label', labels[i], 'label'+i, 'fieldLabels');
         newDiv.appendChild(label);
     }
     
-    if (labels[i] != 'Sex' && labels[i] != 'Level')  {
+    if (labels[i] != 'sex' && labels[i] != 'characterLevel')  {
         let input = CreateInputText("", "input"+i, 'inputFields');
         newDiv.appendChild(input);
     }
@@ -42,7 +42,7 @@ newDiv.appendChild(selectLevel);
 
 // Кнопка "Принять изменения"
 const acceptBtn = CreateButton('Accept changes', 'acceptButton', 'acceptStroke');
-acceptBtn.addEventListener('click', () => acceptChanges2());
+acceptBtn.addEventListener('click', () => acceptChanges());
 newDiv.appendChild(acceptBtn);
 
 function acceptChanges() {
@@ -53,45 +53,33 @@ function acceptChanges() {
     let sex = document.getElementById('input3').value;
     let level = document.getElementById('input4').value;
     
+    //for (let i=0; i < labels.length; i++) {
+    //    setUrlData(labels[i], name);
+    //}
+    
     if (level === levels[0])
         level = 1;
     else if (level === levels[1]) 
         level = 2;
     
-    addData({
-       name: name,
-       sex: sex,
-       health: health,
-       damage: damage,
-       characterLevel: level,
-       locationId: 1
+    updateData({
+        id: getUrlID(),
+        name: name,
+        sex: sex,
+        health: health,
+        damage: damage,
+        characterLevel: level,
+        locationId: 1
     }, 'http://localhost:9101/character/character/');
     
     alert("Успешно!");
     goToPreviousPage();
+    goToPreviousPage();
 }
 
-
-function getNonEmptyFields() {
-    const nonEmptyFields = {};
-
+function loadData() {
     for (let i = 0; i < labels.length; i++) {
-        let input = document.getElementById("input"+i);
-        if (input !== '')
-            nonEmptyFields[labels[i]] = input;
-    }
-
-    return nonEmptyFields;
-}
-
-function acceptChanges2() {
-    const nonEmptyFields = getNonEmptyFields();
-
-    if (Object.keys(nonEmptyFields).length > 0) {
-        updateData(nonEmptyFields, getUrlID(), 'http://localhost:9101/character/character/');
-        alert("Успешно!");
-        goToPreviousPage();
-    } else {
-        alert("Нет данных для обновления.");
+        document.getElementById('input'+i).value = getUrlData(labels[i]);
     }
 }
+loadData();

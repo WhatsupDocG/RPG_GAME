@@ -66,7 +66,7 @@ thead.appendChild(rowArr[0]);
 fetchTableData(
     {
     url: 'http://localhost:9101/character/character',
-    urlStroke: '../../html/Character/character.html?id=',
+    urlStroke: '../../html/Character/character.html?',
     id: '',
     innerId: 'data-character-id',
     table: table,
@@ -79,17 +79,13 @@ const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Button
 div.appendChild(addCharacterBtn);
 addCharacterBtn.addEventListener('click', () =>addCharacter());
 function addCharacter() {
-   window.location.href = '../../html/Character/addEditCharacter.html';
-   saveCurrentPage();
+    saveCurrentPage();
+    window.location.href = '../../html/Character/addEditCharacter.html';
 }
 
-//Creating addCharacter button
 const backButton = CreateButton("Back", "backBtn", "Buttons");
 div.appendChild(backButton);
-backButton.addEventListener('click', () =>backToMenu());
-function backToMenu() {
-   window.location.href = '../../index.html';
-}
+backButton.addEventListener('click', () =>backToMainMenu());
 
 //////////////////////////////////
 //  Creating's elements functions

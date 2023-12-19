@@ -26,6 +26,34 @@ portraitDataDiv.appendChild(nameLabel);
 const levelLabel = CreateLabel('h2', 'Level: '+getUrlLevel(), '', "portraitData");
 portraitDataDiv.appendChild(levelLabel);
 
+const buttonDiv = CreateElement('div');
+buttonDiv.id = "buttonDiv";
+div.appendChild(buttonDiv);
+
+const deleteBtn = CreateButton("Delete hero", "deleteBtn", "Buttons");
+buttonDiv.appendChild(deleteBtn);
+deleteBtn.addEventListener('click', () =>
+{
+    if (confirmDelete())
+        deleteData(getUrlID(), 'http://localhost:9101/character/character/');
+});
+
+const heroParams = ['id', 'name', 'sex', 'health', 'damage', 'characterLevel'];
+
+const changeBtn = CreateButton("Change hero", "changeBtn", "Buttons");
+buttonDiv.appendChild(changeBtn);
+changeBtn.addEventListener('click', () =>
+{
+    saveCurrentPage();
+    
+    let url = '';
+    for (let i=0; i < heroParams.length; i++) {
+        url = url + heroParams[i] + '=' + getUrlData(heroParams[i]) + '&';
+    }
+    
+    window.location.href = '../../html/Character/editCharacter.html?' + url;
+});
+
 
     //Creating table //
 const tableLabelsDiv = CreateElement('div');

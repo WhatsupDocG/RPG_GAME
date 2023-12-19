@@ -19,7 +19,7 @@ body {
 
     /* Upper string */
 .firstStroke {
-    display: inline-block;   
+    display: inline-block;
 }
 #mainLabel {
     margin-top: 0%;
@@ -73,8 +73,8 @@ th, td{
     border: 1px solid black;
     color: black;
 }
-tr.highlighted {
-    background-color: yellow; /* или любой другой цвет */
+.highlighted {
+    background-color: bisque;
 }
 .over {
   background-color: graytext; /* Темно-серый цвет */

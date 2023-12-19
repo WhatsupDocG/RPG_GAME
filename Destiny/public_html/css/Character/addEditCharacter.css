@@ -19,7 +19,7 @@ body {
     /* Upper string */
 .firstStroke {
     display: inline-block;   
-    text-align: right;
+    text-align: center;
 }
 #mainLabel {
     text-align: center;
@@ -37,4 +37,18 @@ body {
     color: black;
     background-color: crimson;
     font-size: 20px;
+}
+
+select {
+    width: 88%;
+    margin-bottom: 1%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+input[type=text] {
+    width: 88%;
+    margin-bottom: 1%;
+    margin-left: 6%;
+    margin-right: 6%;
 }
