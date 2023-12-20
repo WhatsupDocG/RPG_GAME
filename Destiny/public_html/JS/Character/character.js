@@ -26,6 +26,8 @@ portraitDataDiv.appendChild(nameLabel);
 const levelLabel = CreateLabel('h2', 'Level: '+getUrlLevel(), '', "portraitData");
 portraitDataDiv.appendChild(levelLabel);
 
+
+        //*  ChangeAndDeleteButtons  *//
 const buttonDiv = CreateElement('div');
 buttonDiv.id = "buttonDiv";
 div.appendChild(buttonDiv);

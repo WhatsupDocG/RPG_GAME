@@ -5,29 +5,21 @@ newDiv.appendChild(acceptBtn);
 function acceptChanges() {
     
     let name = document.getElementById('input0').value;
-    let health = parseFloat(document.getElementById('input1').value).toFixed(1);
+    let heal = parseFloat(document.getElementById('input1').value).toFixed(1);
     let damage = parseFloat(document.getElementById('input2').value).toFixed(1);
-    let sex = document.getElementById('input3').value;
     let level = document.getElementById('input4').value;
-    
-    //for (let i=0; i < labels.length; i++) {
-    //    setUrlData(labels[i], name);
-    //}
     
     if (level === levels[0])
         level = 1;
-    else if (level === levels[1]) 
-        level = 2;
     
     updateData({
         id: getUrlID(),
         name: name,
-        sex: sex,
-        health: health,
+        heal: heal,
         damage: damage,
-        characterLevel: level,
-        locationId: 1
-    }, 'http://localhost:9101/character/character/');
+        spellLevel: level,
+        spellType: 1
+    }, 'http://localhost:9103/spell/spell/');
     
     alert("Успешно!");
     goToPreviousPage();

@@ -7,7 +7,6 @@ function acceptChanges() {
     let name = document.getElementById('input0').value;
     let health = parseFloat(document.getElementById('input1').value).toFixed(1);
     let damage = parseFloat(document.getElementById('input2').value).toFixed(1);
-    let sex = document.getElementById('input3').value;
     let level = document.getElementById('input4').value;
     
     //for (let i=0; i < labels.length; i++) {
@@ -22,12 +21,12 @@ function acceptChanges() {
     updateData({
         id: getUrlID(),
         name: name,
-        sex: sex,
         health: health,
         damage: damage,
-        characterLevel: level,
+        enemyLevel: level,
+        enemyType: 1,
         locationId: 1
-    }, 'http://localhost:9101/character/character/');
+    }, 'http://localhost:9105/enemy/enemy/');
     
     alert("Успешно!");
     goToPreviousPage();

@@ -80,7 +80,7 @@ div.appendChild(addCharacterBtn);
 addCharacterBtn.addEventListener('click', () =>addCharacter());
 function addCharacter() {
     saveCurrentPage();
-    window.location.href = '../../html/Character/addEditCharacter.html';
+    window.location.href = '../../html/Character/addCharacter.html';
 }
 
 const backButton = CreateButton("Back", "backBtn", "Buttons");

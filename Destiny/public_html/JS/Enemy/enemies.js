@@ -26,7 +26,6 @@ function Searching() {
     rowsInSecondColumn.forEach((item) => {
         
         let row = item.parentElement;
-        console.log(searchTerm + " " + item.textContent.toLowerCase());
         if (searchTerm === '') {
             // Если поле поиска пустое, сбрасываем выделение для всех строк
             row.classList.remove('highlighted');
@@ -70,7 +69,7 @@ thead.appendChild(rowArr[0]);
 fetchTableData(
     {
     url: 'http://localhost:9105/enemy/enemy',
-    urlStroke: '../../html/Enemy/enemy.html?id=',
+    urlStroke: '../../html/Enemy/enemy.html?',
     id: '',
     innerId: 'data-enemy-id',
     table: table,
@@ -80,8 +79,13 @@ fetchTableData(
 
 
 //Creating addCharacter button
-const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
-div.appendChild(addCharacterBtn);
+const addEnemyBtn = CreateButton("Add enemy", "addCharacterBtn", "Buttons");
+div.appendChild(addEnemyBtn);
+addEnemyBtn.addEventListener('click', () =>addEnemy());
+function addEnemy() {
+    saveCurrentPage();
+    window.location.href = '../../html/Enemy/addEnemy.html';
+}
 
 //Creating addCharacter button
 const backButton = CreateButton("Back", "backBtn", "Buttons");

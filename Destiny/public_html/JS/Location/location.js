@@ -26,6 +26,38 @@ portraitDataDiv.appendChild(portrait);
 const nameLabel = CreateLabel('h2', 'Name: ' + getUrlName(), '', "portraitData");
 portraitDataDiv.appendChild(nameLabel);
 
+
+
+        //*  Change and Delete Buttons   *//
+const buttonDiv = CreateElement('div');
+buttonDiv.id = "buttonDiv";
+div.appendChild(buttonDiv);
+
+const deleteBtn = CreateButton("Delete location", "deleteBtn", "Buttons");
+buttonDiv.appendChild(deleteBtn);
+deleteBtn.addEventListener('click', () =>
+{
+    if (confirmDelete())
+        deleteData(getUrlID(), 'http://localhost:9104/location/location/');
+});
+
+const heroParams = ['id', 'name'];
+
+const changeBtn = CreateButton("Change location", "changeBtn", "Buttons");
+buttonDiv.appendChild(changeBtn);
+changeBtn.addEventListener('click', () =>
+{
+    saveCurrentPage();
+    
+    let url = '';
+    for (let i=0; i < heroParams.length; i++) {
+        url = url + heroParams[i] + '=' + getUrlData(heroParams[i]) + '&';
+    }
+    
+    window.location.href = '../../html/Location/editLocation.html?' + url;
+});
+
+
     //Creating table //
 const tableLabelsDiv = CreateElement('div');
 tableLabelsDiv.id = 'tableLabelsDiv';

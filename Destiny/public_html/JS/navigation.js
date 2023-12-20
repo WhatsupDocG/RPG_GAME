@@ -258,7 +258,7 @@ function CreateSelect(arr, id, className) {
 }
 
 function confirmDelete() {
-    const isConfirmed = confirm('Вы уверены, что хотите удалить персонажа?');
+    const isConfirmed = confirm('Вы уверены, что хотите удалить данные?');
 
     return isConfirmed;
 }

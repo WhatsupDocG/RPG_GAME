@@ -70,7 +70,7 @@ thead.appendChild(rowArr[0]);
 fetchTableData(
     {
     url: 'http://localhost:9103/spell/spell/',
-    urlStroke: '../../html/Spell/spell.html?id=',
+    urlStroke: '../../html/Spell/spell.html?',
     id: '',
     innerId: 'data-spell-id',
     table: table,
@@ -78,11 +78,16 @@ fetchTableData(
     }
 );
 
-//Creating addCharacter button
-const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
-div.appendChild(addCharacterBtn);
 
-//Creating addCharacter button
+const addSpellBtn = CreateButton("Add spell", "addCharacterBtn", "Buttons");
+div.appendChild(addSpellBtn);
+addSpellBtn.addEventListener('click', () =>addSpell());
+function addSpell() {
+    saveCurrentPage();
+    window.location.href = '../../html/Spell/addSpell.html';
+}
+
+
 const backButton = CreateButton("Back", "backBtn", "Buttons");
 div.appendChild(backButton);
 backButton.addEventListener('click', () =>backToMainMenu());

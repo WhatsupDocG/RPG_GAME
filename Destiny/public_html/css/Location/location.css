@@ -1,5 +1,5 @@
 body {
-  background-image: url("../../img/bg.jpg");
+  background-image: url("../../img/menu.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -97,4 +97,38 @@ th, td{
 .over {
   background-color: graytext; /* Темно-серый цвет */
   color: #fff; /* Белый цвет текста, чтобы текст был виден на темном фоне */
+}
+
+#buttonDiv {
+    margin-bottom: 1%;
+    margin-left: 6%;
+    display:flex;
+}
+.Buttons {
+    margin-right: 6%;
+    margin-bottom: 5%;
+    background-color: #ff5050; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста на кнопке */
+    padding: 10px 15px; /* Внутренний отступ кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругление углов */
+    cursor: pointer; /* Задаем указатель при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+
+    font-weight: bold; /* Жирный шрифт */
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.Buttons:hover {
+    background-color: white; 
+    color:  #4169E1;
+}
+.Buttons:active {
+  background-color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#changeBtn {
+    background-color: blue;
 }

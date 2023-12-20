@@ -62,11 +62,15 @@ let rowArr = [];
 CreateTableHead();
 thead.appendChild(rowArr[0]);
 
-//Creating addCharacter button
-const addCharacterBtn = CreateButton("Add character", "addCharacterBtn", "Buttons");
-div.appendChild(addCharacterBtn);
 
-//Creating addCharacter button
+const addLocationBtn = CreateButton("Add location", "addCharacterBtn", "Buttons");
+div.appendChild(addLocationBtn);
+addLocationBtn.addEventListener('click', () =>addLocation());
+function addLocation() {
+    saveCurrentPage();
+    window.location.href = '../../html/Location/addLocation.html';
+}
+
 const backButton = CreateButton("Back", "backBtn", "Buttons");
 div.appendChild(backButton);
 backButton.addEventListener('click', () =>backToMenu());
@@ -93,7 +97,7 @@ function CreateTableHead() {
 fetchTableData(
     {
     url: 'http://localhost:9104/location/location',
-    urlStroke: '../../html/Location/location.html?id=',
+    urlStroke: '../../html/Location/location.html?',
     id: '',
     innerId: 'data-location-id',
     table: table,

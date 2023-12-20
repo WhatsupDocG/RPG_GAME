@@ -1,5 +1,5 @@
 body {
-  background-image: url("../../img/bg.jpg");
+  background-image: url("../../img/menu.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -78,6 +78,9 @@ th, td{
   background-color: graytext; /* Темно-серый цвет */
   color: #fff; /* Белый цвет текста, чтобы текст был виден на темном фоне */
   /* Дополнительные стили по вашему желанию */
+}
+.highlighted {
+    background-color: bisque;
 }
 
 

@@ -78,6 +78,9 @@ th, td{
   color: #fff; /* Белый цвет текста, чтобы текст был виден на темном фоне */
   /* Дополнительные стили по вашему желанию */
 }
+.highlighted {
+    background-color: bisque;
+}
 
     /* Bottom buttons */
 .Buttons {
